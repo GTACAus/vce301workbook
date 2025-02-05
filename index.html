@@ -112,14 +112,15 @@
 
                 <h2>Modelling: Gel Electrophoresis</h2>
               <h4>Insert picture of your predicted eGel results </h4>
-                 <div id="imageContainer0" class="image-container"></div>
+                <div id="imageContainer0" class="image-container"></div>
                 <input type="file" accept="image/*" onchange="addImage(event, 0)">
               
                 <h2>Results: Gel Electrophoresis </h2>
               <h4>Insert picture of the eGel results </h4>
               
-                 <div id="imageContainer1" class="image-container"></div>
+                <div id="imageContainer1" class="image-container"></div>
                 <input type="file" accept="image/*" onchange="addImage(event, 1)">
+            </div>
               
               <h2>Analysis: DNA Gel Electrophoresis results </h2>
               <h4>Identify the tube that contains the recombinant plasmids (Tube 1 or Tube 2?). 
@@ -172,7 +173,6 @@
                 <input type="file" accept="image/*" onchange="addImage(event, 2)">
               <h3>   Analysis of Results: Bacterial Transformation - Back at school      </h3>
 
-
                 <textarea placeholder="Fill in the blanks / long answer questions"></textarea>
  <body>
      <div>         
@@ -181,27 +181,37 @@
     </div>
 
     <script>
+        function showExperiment(index) {
+            document.querySelectorAll('.experiment').forEach(el => el.classList.remove('active'));
+            document.getElementById(`exp${index}`).classList.add('active');
+        }
+        
+        function addImage(event, index) {
+            const container = document.getElementById(`imageContainer${index}`);
+            container.innerHTML = ""; 
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    container.appendChild(img);
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
         function generatePDF() {
-            const experiment = document.getElementById('experiment').value;
-            const answer = document.getElementById('answer').value;
-            
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-            doc.text(`Experiment: ${experiment}`, 10, 10);
-            doc.text(`Answer: ${answer}`, 10, 20);
-            doc.save("Science_Practical.pdf");
+            const element = document.body;
+            html2pdf().from(element).save("GTAC_Workbook.pdf");
         }
 
         function sendEmail() {
-            const recipient = "teacher@example.com"; // Replace with the desired email
-            const subject = "Science Practical Submission";
-            const body = "Dear Teacher,\n\nPlease find attached my science practical submission.\n\nBest regards,";
-            
-            window.location.href = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            const email = prompt("Enter the recipient's email:");
+            if (email) {
+                alert(`The PDF will be sent to ${email}. (This requires backend integration)`);
+            }
         }
     </script>
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 </body>
-     
 </html>
