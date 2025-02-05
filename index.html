@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Science Practical Report</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
+    <style>
+        body { font-family: Figtree, sans-serif; text-align: center; margin: 20px; }
+        .container { max-width: 800px; margin: auto; }
+        .experiment { display: none; }
+        .active { display: block; }
+        button { margin: 5px; padding: 10px; cursor: pointer; }
+        textarea { width: 100%; height: 100px; margin: 10px 0; }
+        .image-container img { max-width: 100%; height: auto; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Applying Biotechnologies to Produce Human Insulin at GTAC </h1>
+        <h2>    Add your names here</h2>
+        <input type="text" id="studentNames" placeholder="Type your names here" style="width:100%; margin-bottom: 10px;">
+        
+          <img src="https://cdn.glitch.global/bedc10a6-54ca-4681-bce3-e9149cb53de3/recombinantplasmid?v=1738712387414" alt="Process of transforming bacteria with recombinant plasmid" style="width:100%;">
+
+       
+        <h2>Session Outline</h2>
+         <div>
+            <button onclick="showExperiment(0)">Investigation 1: Plasmid Diagnostics</button>
+      </div>
+      <div>
+            <button onclick="showExperiment(1)">Investigation 2: Bacterial Transformation</button>
+      </div>
+      <div>
+            <button onclick="showExperiment(2)">Investigation 3: Selecting Transformed Bacteria</button>
+        </div>
+
+      
+        
+        <div id="report">
+            <div class="experiment active" id="exp0">
+                <h2>Investigation 1: Plasmid Diagnostics</h2>
+                 <h3>Learning intention: To analyse restriction digest results using DNA gel electrophoresis.</h3>
+              <img src="https://cdn.glitch.global/bedc10a6-54ca-4681-bce3-e9149cb53de3/orivsrecombinantplasmidmap?v=1738715311314" alt="Plasmid map comparison" style="width:100%;">
+<h4>  Identify 4 differences between the Original and the Recombinant Plasmid Maps
+              </h4>
+                <textarea placeholder="List 4 differences as you compare the Original and the Recombinant Plasmid Maps"></textarea>
+              
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results: Modelling Double digest on plasmids</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        td[contenteditable="true"] {
+            background-color: #eaf7ff;
+        }
+    </style>
+</head>
+<body>
+    <h2>Results: Modelling Double digest on plasmids</h2>
+    <table>
+        <tr>
+            <th>   </th>
+            <th colspan="2">Original Plasmid (4641 bp)</th>
+            <th colspan="2">Recombinant Plasmid (5428 bp)</th>
+        </tr>
+        <tr>
+            <td>Enzyme pair used for digest:</td>
+            <td>Number of fragments</td>
+            <td>Sizes of fragments (bp)</td>
+            <td>Number of fragments</td>
+            <td>Sizes of fragments (bp)</td>
+        </tr>
+        <tr>
+            <td>EcoRV
+                <div>
+              NheI</div></td>
+            <td contenteditable="true"></td>
+            <td contenteditable="true"></td>
+            <td contenteditable="true"></td>
+            <td contenteditable="true"></td>
+        </tr>
+        <tr>
+            <td>EcoRV <div>
+              XhoI
+              </div></td>
+            <td contenteditable="true"></td>
+            <td contenteditable="true"></td>
+            <td contenteditable="true"></td>
+            <td contenteditable="true"></td>
+        </tr>
+        <tr>
+            <td>NheI <div>
+              SmaI
+              </div></td>
+            <td contenteditable="true"></td>
+            <td contenteditable="true"></td>
+            <td contenteditable="true"></td>
+            <td contenteditable="true"></td>
+        </tr>
+    </table>
+</body>
+</html>
+
+
+                <h2>Modelling: Gel Electrophoresis:</h2>
+              <h4>Insert picture of your predicted eGel results </h4>
+                <div id="predictedEgel" class="image-container"></div>
+                <input type="file" accept="image/*" onchange="addImage(event, 0)">
+              
+                <h2>Results: Gel Electrophoresis </h2>
+              <h4>Insert picture of the eGel results </h4>
+              
+                <div id="eGelresults" class="image-container"></div>
+                <input type="file" accept="image/*" onchange="addImage(event, 0)">
+              
+              <h2>Analysis: DNA Gel Electrophoresis results </h2>
+              <h4>Identify the tube that contains the recombinant plasmids (Tube 1 or Tube 2?). 
+                <div>  Justify your answer. </div> </h4>
+
+              
+
+                <textarea placeholder="Type your answer here"></textarea>
+            </div>
+          
+          
+          
+          
+          
+          
+          
+                 
+            <div class="experiment" id="exp1">
+                <h2>Investigation 2: Bacterial Transformation</h2>
+              <h3>Learning intention: To refine a lab protocol to transform bacteria with recombinant plasmids.</h3>
+              
+              <img src="https://cdn.glitch.global/bedc10a6-54ca-4681-bce3-e9149cb53de3/Investigation2?v=1738727664648" alt="Example Image" style="width:100%;">
+
+              
+              <h4>Method:  </h4>
+              <h4>Step 1: Making bacteria competent  </h4>
+
+              <img src="https://cdn.glitch.global/bedc10a6-54ca-4681-bce3-e9149cb53de3/competentbacteria?v=1738724782056" alt="Using CaCl2 to make bacteria competent" style="width:100%;">
+              
+              <img src="https://cdn.glitch.global/bedc10a6-54ca-4681-bce3-e9149cb53de3/Cacl2%20conc%20graph.png?v=1738719272040" alt="CaCl2 graph" style="width:100%;">
+              <h5> Use this data to decide the Calcium chloride concentration that you will use with your bacteria </h5>
+                <textarea placeholder="Select the concentration of CaCl2 here. Describe why we use Calcium chloride"></textarea>
+             
+                            <body>     <div class="step">1. Transfer 3-5 <i>E. coli</i> colonies into 250 µL CaCl<sub>2</sub> solution.</div>
+    <div class="step">2. Add 100 µL <i>E. coli</i> solution into both -pREC and +pREC tubes.</div>
+    <div class="step">3. Place tubes on ice for 20 minutes.</div>
+</body>
+              
+              <h4>Step 2: Heat Shock </h4>
+              <img src="https://cdn.glitch.global/bedc10a6-54ca-4681-bce3-e9149cb53de3/heatshock.png?v=1738726774760" alt="Heat Shock" style="width:100%;">
+
+             <h4> Select the temperature and time for heat shock using the data above</h4>
+
+               <textarea placeholder="Type your selected conditions for heat shock here"></textarea>
+                            <div> <h5> What is the purpose of heat shock? </h5> </div>  
+                <textarea placeholder="Type the purpose of heat shock here"></textarea>
+               <h4>Step 3: Recovery  </h4>
+          <h5>           Use the data to determine the recovery time for your transformation protocol. </h5>
+          <textarea placeholder="Insert recovery time here"></textarea>
+ <body>     <div class="step">Now, add 1mL LB broth at 37<sup>o</sup>C for your selected recovery time under sterile conditions.</div>
+
+</body>
+          
+          
+            </div>
+          
+         
+          
+            <div class="experiment" id="exp2">
+                <h2>Investigation 3: Selecting for Transformed Bacteria</h2>
+              <h3>Learning intention: To justify my selection of transformed bacteria for use in insulin production.</h3>    
+               
+              <h4> Results: Fluorescence microscopy              </h4>
+              
+                              <div id="imageContainer2" class="image-container"></div>
+                <input type="file" accept="image/*" onchange="addImage(event, 2)">
+              <h3>   Analysis of Results: Bacterial Transformation - Back at school      </h3>
+
+
+                <textarea placeholder="Fill in the blanks / long answer questions"></textarea>
+            </div>
+        </div>
+
+      
+      
+      
+        <button onclick="savePDF()">Save as PDF</button>
+    </div>
+
+    <script>
+        function showExperiment(index) {
+            document.querySelectorAll('.experiment').forEach((exp, i) => {
+                exp.classList.toggle('active', i === index);
+            });
+        }
+
+        function addImage(event, index) {
+            const reader = new FileReader();
+            reader.onload = function() {
+                const img = document.createElement('img');
+                img.src = reader.result;
+                document.getElementById(`imageContainer${index}`).appendChild(img);
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+
+        function savePDF() {
+            const studentNames = document.getElementById("studentNames").value || "Science_Report";
+            const element = document.getElementById("report");
+            html2pdf().from(element).save(`${studentNames}.pdf`);
+        }
+    </script>
+</body>
+</html>
+ <button onclick="saveTempFile()">Save Temporary File</button>
+        <button onclick="loadTempFile()">Load Temporary File</button>
+        <input type="file" id="loadFile" style="display:none" onchange="handleFileUpload(event)">
+        <button onclick="sendPDF()">Send PDF via Email</button>
+   
+    <script>
+        function showExperiment(index) {
+            document.querySelectorAll('.experiment').forEach((exp, i) => {
+                exp.classList.toggle('active', i === index);
+            });
+        }
+
+        function addImage(event, index) {
+            const reader = new FileReader();
+            reader.onload = function() {
+                const img = document.createElement('img');
+                img.src = reader.result;
+                document.getElementById(`imageContainer${index}`).appendChild(img);
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+
+        function saveTempFile() {
+            const data = {
+                studentNames: document.getElementById("studentNames").value,
+                sessionOutline: document.getElementById("sessionOutline").value,
+                investigations: Array.from(document.getElementsByClassName("investigation-text")).map(el => el.value)
+            };
+            const blob = new Blob([JSON.stringify(data)], { type: "application/json" });
+            saveAs(blob, "Science_Report.json");
+        }
+
+        function loadTempFile() {
+            document.getElementById("loadFile").click();
+        }
+
+        function handleFileUpload(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            reader.onload = function() {
+                const data = JSON.parse(reader.result);
+                document.getElementById("studentNames").value = data.studentNames;
+                document.getElementById("sessionOutline").value = data.sessionOutline;
+                const investigationFields = document.getElementsByClassName("investigation-text");
+                data.investigations.forEach((text, i) => investigationFields[i].value = text);
+            };
+            reader.readAsText(file);
+        }
+
+        function sendPDF() {
+            const teacherEmail = document.getElementById("teacherEmail").value;
+            if (!teacherEmail) {
+                alert("Please enter a teacher's email address.");
+                return;
+            }
+            
+            const studentNames = document.getElementById("studentNames").value || "Science_Report";
+            const element = document.getElementById("report");
+            
+            html2pdf().from(element).toPdf().get('pdf').then(function (pdf) {
+                const formData = new FormData();
+                formData.append("file", pdf.output("blob"));
+                formData.append("email", teacherEmail);
+                
+                fetch("https://formsubmit.co/ajax/YOUR_EMAIL_HERE", {
+                    method: "POST",
+                    body: formData
+                }).then(response => response.json()).then(data => {
+                    alert("PDF sent successfully to " + teacherEmail);
+                }).catch(error => {
+                    alert("Failed to send email. Try again later.");
+                });
+            });
+        }
+    </script>
