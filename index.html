@@ -22,7 +22,10 @@
         <h1>Student Workbook: Applying Biotechnologies to Produce Human Insulin at GTAC </h1>
         <h2>Your names here</h2>
         <input type="text" id="studentNames" placeholder="Type your names here" style="width:100%; margin-bottom: 10px;">
-        
+             <div>         
+        <button onclick="generatePDF()">Print to PDF</button>
+        <button onclick="sendEmail()">Send via Email</button>
+    </div>
           <img src="https://cdn.glitch.global/bedc10a6-54ca-4681-bce3-e9149cb53de3/recombinantplasmid?v=1738712387414" alt="Process of transforming bacteria with recombinant plasmid" style="width:100%;">
 
        
@@ -174,10 +177,7 @@
               <h3>   Analysis of Results: Bacterial Transformation - Back at school      </h3>
 
                 <textarea placeholder="Fill in the blanks / long answer questions"></textarea>
-     <div>         
-        <button onclick="generatePDF()">Print to PDF</button>
-        <button onclick="sendEmail()">Send via Email</button>
-    </div>
+
 
     <script>
         function showExperiment(index) {
