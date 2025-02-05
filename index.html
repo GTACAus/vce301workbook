@@ -23,8 +23,8 @@
         <h2>Your names here</h2>
         <input type="text" id="studentNames" placeholder="Type your names here" style="width:100%; margin-bottom: 10px;">
              <div>         
-        <button onclick="generatePDF()">Print to PDF</button>
-        <button onclick="sendEmail()">Send via Email</button>
+        <button onclick="printAllExperiments()">Save as PDF</button>    
+        <button onclick="sendEmail()">Send PDF via Email</button>
     </div>
           <img src="https://cdn.glitch.global/bedc10a6-54ca-4681-bce3-e9149cb53de3/recombinantplasmid?v=1738712387414" alt="Process of transforming bacteria with recombinant plasmid" style="width:100%;">
 
@@ -200,16 +200,23 @@
             }
         }
 
-        function generatePDF() {
-            const element = document.body;
-            html2pdf().from(element).save("GTAC_Workbook.pdf");
+        function printAllExperiments() {
+            let printWindow = window.open('', '_blank');
+            printWindow.document.write('<html><head><title>VCE301 Student Workbook</title></head><body>');
+            printWindow.document.write(document.getElementById("experiment1").outerHTML);
+            printWindow.document.write(document.getElementById("experiment2").outerHTML);
+            printWindow.document.write(document.getElementById("experiment3").outerHTML);
+            printWindow.document.write('</body></html>');
+            printWindow.document.close();
+            printWindow.print();
         }
 
-        function sendEmail() {
-            const email = prompt("Enter the recipient's email:");
-            if (email) {
-                alert(`The PDF will be sent to ${email}. (This requires backend integration)`);
-            }
+ function sendEmail() {
+            let studentNames = document.getElementById("studentNames").value || "GTAC VCE301 Student Workbook";
+            let subject = encodeURIComponent(studentNames);
+            let body = encodeURIComponent("Please find our student logbook attached.");
+            window.location.href = `mailto:?subject=${subject}&body=${body}`;
+        }
         }
     </script>
 </body>
