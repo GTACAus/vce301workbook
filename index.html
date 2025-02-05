@@ -199,7 +199,14 @@
                 reader.readAsDataURL(file);
             }
         }
-
+<style>
+.image-container {
+    margin-top: 10px;
+    max-width: 300px; /* Adjust as needed */
+    border: 1px solid #ccc; /* Optional: To visualize the container */
+    padding: 5px;
+}
+</style>
         function printAllExperiments() {
             let printWindow = window.open('', '_blank');
             printWindow.document.write('<html><head><title>VCE301 Student Workbook</title></head><body>');
