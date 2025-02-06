@@ -6,11 +6,8 @@
     <title>GTAC VCE301 Student Logbook</title>
 
     <style>
-        body {
-            font-family: Figtree, sans-serif;
-            margin: 20px; /* Added margin */
-            padding: 0;
-        }
+        body { font-family: Figtree, sans-serif; text-align: center; margin: 20px; }
+        .experiment { margin-bottom: 20px; border: 1px solid #ccc; padding: 10px; }
         .sidebar {
             position: fixed;
             top: 10px;
@@ -32,15 +29,9 @@
         .investigation {
             margin-bottom: 50px;
         }
-        .image-container {
-            max-width: 100%; height: auto; margin-top: 10px;
-        }
-        textarea {
-            width: 100%;
-            height: 100px; 
-            margin-top: 10px;
-            font-size: 16px; /* Larger text */
-        }
+        .image-container { max-width: 100%; height: auto; margin-top: 10px; }
+        textarea { width: 100%; height: 100px; margin-top: 10px; }
+        
     </style>
 </head>
 <body>
@@ -56,6 +47,7 @@
         <h2>    Add your names here:</h2>
         <input type="text" id="studentNames" placeholder="Type your names here" style="width:100%; margin-bottom: 10px;">
         
+       <img src="https://cdn.glitch.global/bedc10a6-54ca-4681-bce3-e9149cb53de3/recombinantplasmid?v=1738712387414" alt="Process of transforming bacteria with recombinant plasmid" style="width:100%;">
 
         <div id="exp1" class="experiment active">
             <h2>Investigation 1: Plasmid Diagnostics</h2>
@@ -220,8 +212,8 @@
         </body>
         </div>
         
-        <button onclick="savePageAsPDF()">Save as PDF</button>    
-  
+   <button onclick="generatePDF()">Save as PDF</button>
+    
     </div>
     
     <script>
@@ -255,12 +247,10 @@
             });
         }
         
-        function savePageAsPDF() {
-    const studentNames = document.getElementById('studentNames').value;
-    if (!studentNames.trim()) {
-        alert("Please enter student names.");
-        return;
-    }
+function generatePDF() {
+            const name = document.getElementById('studentName').value.trim() || 'Student';
+            html2pdf().from(window.print).save(`${name}_VCE301logbook.pdf`);
+        }
 
     const today = new Date();
     const date = today.toISOString().split('T')[0];
