@@ -3,46 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GTAC VCE301 Student Workbook - Applying biotechnologies to produce human insulin</title>
+    <title>GTAC VCE301 Student Logbook</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
-
     <style>
-        body { font-family: Figtree, sans-serif; text-align: center; margin: 20px; }
-        .container { max-width: 800px; margin: auto; }
-        .experiment { display: none; }
+        body { font-family: Figtree, sans-serif; text-align: center; }
+        .container { width: 80%; margin: auto; }
+        .experiment { display: none; margin-top: 20px; }
         .active { display: block; }
-        button { margin: 5px; padding: 10px; cursor: pointer; }
-        textarea { width: 100%; height: 100px; margin: 10px 0; }
-        .image-container img { max-width: 100%; height: auto; margin-top: 10px; }
+        img { max-width: 100%; height: auto; margin-top: 10px; }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Applying Biotechnologies to Produce Human Insulin at GTAC </h1>
-        <h2>Your names here</h2>
-        <input type="text" id="studentNames" placeholder="Type your names here" style="width:100%; margin-bottom: 10px;">
-             <div>         
-        <button onclick="printAllExperiments()">Save as PDF</button>    
-        <button onclick="sendEmail()">Send PDF via Email</button>
-    </div>
-          <img src="https://cdn.glitch.global/bedc10a6-54ca-4681-bce3-e9149cb53de3/recombinantplasmid?v=1738712387414" alt="Process of transforming bacteria with recombinant plasmid" style="width:100%;">
-
-       
-        <h2>Session Outline</h2>
-         <div><button onclick="showExperiment(0)">Investigation 1: Plasmid Diagnostics</button></div>
-      <div> <button onclick="showExperiment(1)">Investigation 2: Bacterial Transformation</button> </div>
-      <div><button onclick="showExperiment(2)">Investigation 3: Selecting Transformed Bacteria</button> </div>
-
-        <div id="report">
-            <div class="experiment active" id="exp0">
-                <h2>Investigation 1: Plasmid Diagnostics</h2>
-                 <h3>Learning intention: To analyse restriction digest results using DNA gel electrophoresis.</h3>
-              <img src="https://cdn.glitch.global/bedc10a6-54ca-4681-bce3-e9149cb53de3/orivsrecombinantplasmidmap?v=1738715311314" alt="Plasmid map comparison" style="width:100%;">
-<h4>  Identify 4 differences between the Original and the Recombinant Plasmid Maps
-              </h4>
+        <h1>GTAC VCE301 - Student Logbook</h1>
+        
+        <button onclick="showExperiment('exp1')">Investigation 1</button>
+        <button onclick="showExperiment('exp2')">Investigation 2</button>
+        <button onclick="showExperiment('exp3')">Investigation 3</button>
+        
+        <div id="exp1" class="experiment active">
+            <h2>Investigation 1: Plasmid Diagnostics</h2>
+             <h3>Learning intention: To analyse restriction digest results using DNA gel electrophoresis.</h3>
+            <img src="https://cdn.glitch.global/bedc10a6-54ca-4681-bce3-e9149cb53de3/orivsrecombinantplasmidmap?v=1738715311314" alt="Plasmid map comparison" style="width:100%;">
+            <h4>  Identify 4 differences between the Original and the Recombinant Plasmid Maps </h4>
                 <textarea placeholder="List 4 differences as you compare the Original and the Recombinant Plasmid Maps"></textarea>
-              
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -113,27 +98,27 @@
 </html>
 
 
-                <h2>Modelling: Gel Electrophoresis</h2>
+
+
+            h2>Modelling: Gel Electrophoresis</h2>
               <h4>Insert picture of your predicted eGel results </h4>
-                <div id="imageContainer0" class="image-container"></div>
-                <input type="file" accept="image/*" onchange="addImage(event, 0)">
-              
-                <h2>Results: Gel Electrophoresis </h2>
+            <input type="file" accept="image/*" onchange="addImage(event, 'imageContainer1')">
+            <div id="imageContainer1"></div>
+            
+            <h2>Results: Gel Electrophoresis </h2>
               <h4>Insert picture of the eGel results </h4>
-              
-                <div id="imageContainer1" class="image-container"></div>
-                <input type="file" accept="image/*" onchange="addImage(event, 1)">
-            </div>
-              
-              <h2>Analysis: DNA Gel Electrophoresis results </h2>
+           <input type="file" accept="image/*" onchange="addImage(event, 'imageContainer2')">
+            <div id="imageContainer2"></div>
+            <h2>Analysis: DNA Gel Electrophoresis results </h2>
               <h4>Identify the tube that contains the recombinant plasmids (Tube 1 or Tube 2?). 
                 <div>  Justify your answer. </div> </h4>
                 <textarea placeholder="Type your answer here"></textarea></div>
-          
-  
-            <div class="experiment" id="exp1">
-                <h2>Investigation 2: Bacterial Transformation</h2>
-              <h3>Learning intention: To refine a lab protocol to transform bacteria with recombinant plasmids.</h3>
+
+        </div>
+        
+        <div id="exp2" class="experiment">
+            <h2>Investigation 2: Bacterial Transformation</h2>
+           <h3>Learning intention: To refine a lab protocol to transform bacteria with recombinant plasmids.</h3>
               
               <img src="https://cdn.glitch.global/bedc10a6-54ca-4681-bce3-e9149cb53de3/Investigation2?v=1738727664648" alt="Example Image" style="width:100%;">
 
@@ -166,16 +151,18 @@
           <textarea placeholder="Insert recovery time here"></textarea>
  <body>     <div class="step">Now, add 1mL LB broth at 37<sup>o</sup>C for your selected recovery time under sterile conditions.</div></body>
       
-            <div class="experiment" id="exp2">
-                <h2>Investigation 3: Selecting for Transformed Bacteria</h2>
-              <h3>Learning intention: To justify my selection of transformed bacteria for use in insulin production.</h3>    
-               
-              <h4> Results: Fluorescence microscopy              </h4>
-              
-                 <div id="imageContainer2" class="image-container"></div>
-                <input type="file" accept="image/*" onchange="addImage(event, 2)">
 
-               <div> <h5>What is the purpose of the GFP gene in this transformation experiment? </h5></div>
+        </div>
+        
+        <div id="exp3" class="experiment">
+            <h2>Investigation 3: Selecting for Transformed Bacteria</h2>
+            <h3>Learning intention: To justify my selection of transformed bacteria for use in insulin production.</h3>    
+             <h4> Results: Fluorescence microscopy              </h4>
+            <h5>Insert an image of your expected results </h5>
+            
+            <input type="file" accept="image/*" onchange="addImage(event, 'imageContainer3')">
+            <div id="imageContainer3"></div>
+             <div> <h5>What is the purpose of the GFP gene in this transformation experiment? </h5></div>
                 <textarea placeholder="Type the purpose of GFP here"></textarea>
                 
                 <div><h5>What is the purpose of adding arabinose sugar to the growth media (LB/Amp/Ara)? </h5></div>
@@ -191,35 +178,34 @@
 
                 <h3> Conclusions:      </h3>
                 <textarea placeholder="Type your conclusion of the investigation here"></textarea>
+
+        </div>
+        
+        <button onclick="printAllExperiments()">Save as PDF</button>    
+        <button onclick="sendEmail()">Send PDF via Email</button>
+    </div>
+    
     <script>
-        function showExperiment(index) {
-            document.querySelectorAll('.experiment').forEach(el => el.classList.remove('active'));
-            document.getElementById(`exp${index}`).classList.add('active');
+        function showExperiment(expId) {
+            document.querySelectorAll('.experiment').forEach(exp => {
+                exp.classList.remove('active');
+                exp.style.display = 'none';
+            });
+            document.getElementById(expId).classList.add('active');
+            document.getElementById(expId).style.display = 'block';
         }
         
-        function addImage(event, index) {
-            const container = document.getElementById(`imageContainer${index}`);
-            container.innerHTML = ""; 
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const img = document.createElement('img');
-                    img.src = e.target.result;
-                    container.appendChild(img);
-                };
-                reader.readAsDataURL(file);
-            }
+        function addImage(event, containerId) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = ''; // Clear previous images
+            Array.from(event.target.files).forEach(file => {
+                const img = document.createElement('img');
+                img.src = URL.createObjectURL(file);
+                container.appendChild(img);
+            });
         }
-<style>
-.image-container {
-    margin-top: 10px;
-    max-width: 300px; /* Adjust as needed */
-    border: 1px solid #ccc; /* Optional: To visualize the container */
-    padding: 5px;
-}
-</style>
-        function printAllExperiments() {
+        
+function printAllExperiments() {
             let printWindow = window.open('', '_blank');
             printWindow.document.write('<html><head><title>VCE301 Student Workbook</title></head><body>');
             printWindow.document.write(document.getElementById("experiment1").outerHTML);
@@ -237,7 +223,7 @@
             window.location.href = `mailto:?subject=${subject}&body=${body}`;
         }
         }
+
     </script>
 </body>
-                
 </html>
