@@ -4,25 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GTAC VCE301 Student Logbook</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
     <style>
-        body { font-family: Figtree, sans-serif; text-align: center; }
-        .container { width: 80%; margin: auto; }
-        .experiment { display: none; margin-top: 20px; }
-        .active { display: block; }
-        button { margin: 5px; padding: 10px; cursor: pointer; }
-        textarea { width: 100%; height: 100px; margin: 10px 0; }
-        .image-container img { max-width: 100%; height: auto; margin-top: 10px; }
+        body {
+            font-family: Figtree, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .sidebar {
+            position: fixed;
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .sidebar button {
+            padding: 10px;
+            cursor: pointer;
+            background: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        .container {
+            margin-left: 100px;
+            padding: 20px;
+        }
+        .investigation {
+            margin-bottom: 50px;
+        }
+        .image-container {
+            margin-top: 10px;
+        }
+        textarea {
+            width: 100%;
+            height: 150px; /* Increased height */
+            font-size: 16px; /* Larger text */
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>GTAC VCE301 - Student Logbook</h1>
-        
-        <button onclick="showExperiment('exp1')">Investigation 1</button>
-        <button onclick="showExperiment('exp2')">Investigation 2</button>
-        <button onclick="showExperiment('exp3')">Investigation 3</button>
-        
+    <div class="sidebar">
+        <button onclick="scrollToSection('investigation1')">Investigation 1</button>
+        <button onclick="scrollToSection('investigation2')">Investigation 2</button>
+        <button onclick="scrollToSection('investigation3')">Investigation 3</button>
+    </div>
         <div id="exp1" class="experiment active">
             <h2>Investigation 1: Plasmid Diagnostics</h2>
              <h3>Learning intention: To analyse restriction digest results using DNA gel electrophoresis.</h3>
@@ -105,12 +133,12 @@
             h2>Modelling: Gel Electrophoresis</h2>
               <h4>Insert picture of your predicted eGel results </h4>
             <input type="file" accept="image/*" onchange="addImage(event, 'imageContainer1')">
-            <div id="imageContainer1"></div>
+            <div id="imageContainer1" class="image-container"></div>
             
             <h2>Results: Gel Electrophoresis </h2>
               <h4>Insert picture of the eGel results </h4>
-           <input type="file" accept="image/*" onchange="addImage(event, 'imageContainer2')">
-            <div id="imageContainer2"></div>
+            <input type="file" accept="image/*" onchange="addImage(event, 'imageContainer2')">
+            <div id="imageContainer2" class="image-container"></div>
             <h2>Analysis: DNA Gel Electrophoresis results </h2>
               <h4>Identify the tube that contains the recombinant plasmids (Tube 1 or Tube 2?). 
                 <div>  Justify your answer. </div> </h4>
@@ -161,9 +189,8 @@
             <h3>Learning intention: To justify my selection of transformed bacteria for use in insulin production.</h3>    
              <h4> Results: Fluorescence microscopy              </h4>
             <h5>Insert an image of your expected results </h5>
-            
             <input type="file" accept="image/*" onchange="addImage(event, 'imageContainer3')">
-            <div id="imageContainer3"></div>
+            <div id="imageContainer3" class="image-container"></div>
              <div> <h5>What is the purpose of the GFP gene in this transformation experiment? </h5></div>
                 <textarea placeholder="Type the purpose of GFP here"></textarea>
                 
@@ -188,13 +215,24 @@
     </div>
     
     <script>
-        function showExperiment(expId) {
-            document.querySelectorAll('.experiment').forEach(exp => {
-                exp.classList.remove('active');
-                exp.style.display = 'none';
-            });
-            document.getElementById(expId).classList.add('active');
-            document.getElementById(expId).style.display = 'block';
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function addImage(event, containerId) {
+            const container = document.getElementById(containerId);
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.createElement("img");
+                    img.src = e.target.result;
+                    img.style.maxWidth = "100%";
+                    container.innerHTML = "";
+                    container.appendChild(img);
+                };
+                reader.readAsDataURL(file);
+            }
         }
         
         function addImage(event, containerId) {
@@ -210,9 +248,6 @@
 function printAllExperiments() {
             let printWindow = window.open('', '_blank');
             printWindow.document.write('<html><head><title>VCE301 Student Workbook</title></head><body>');
-            printWindow.document.write(document.getElementById("experiment1").outerHTML);
-            printWindow.document.write(document.getElementById("experiment2").outerHTML);
-            printWindow.document.write(document.getElementById("experiment3").outerHTML);
             printWindow.document.write('</body></html>');
             printWindow.document.close();
             printWindow.print();
