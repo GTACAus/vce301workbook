@@ -26,7 +26,6 @@
         }
         .container { max-width: 800px; margin: 20px; 
         }
-        
         .investigation {
             margin-bottom: 50px;
         }
@@ -41,7 +40,6 @@
         <button onclick="scrollToSection('exp2')">Investigation 2</button>
         <button onclick="scrollToSection('exp3')">Investigation 3</button>
               <button onclick="saveAsPDF()">Save as PDF</button>
-        
     </div>
 </style>
    <div class="container">
@@ -190,9 +188,9 @@
                             <div> <h5> What is the purpose of heat shock? </h5> </div>  
                 <textarea placeholder="Type the purpose of heat shock here"></textarea>
                <h4>Step 3: Recovery  </h4>
-          <h5>           Use the data to determine the recovery time for your transformation protocol.  Describe the purpose of recovery. </h5>
+          <h5>           Use the data to determine the recovery time for your transformation protocol. </h5>
                  <img src="https://cdn.glitch.global/fcc4e6ca-0f57-4233-b69a-10230c4b69f6/recoverytime?v=1738795693224" alt="Recovery Time graph" style="width:100%;">
-          <textarea placeholder="Type your response here."></textarea>
+          <textarea placeholder="Insert recovery time here"></textarea>
 
             
 
@@ -233,10 +231,9 @@
             
                 
               <h3> Discussion:      </h3>
-                <h5>Consider the following questions:</h5>
-<p align="left">  1. What is the purpose of transforming bacteria?
-    2. What are some possible explanations for differences between the results you might see back at schoo? i.e. Limitations and errors? 
-</p>
+                <h5>Answer the following questions:</h5>
+ <p align="left">  <div class="step">1. What is the purpose of transforming bacteria?</div> </p>
+<p align="left"> <div class="step">2. What are some possible explanations for differences between the results you might see back at schoo? i.e. Limitations and errors?</div> </p>
       
                 <textarea placeholder="Type your response here"></textarea>
 
@@ -272,7 +269,7 @@
         function saveAsPDF() {
             window.print();
         }
-
+   
     </script>
 </body>
 </html>
