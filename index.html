@@ -138,7 +138,7 @@
                 <div>  Justify your answer. </div> </h4>
                 <textarea placeholder="Type your answer here"></textarea></div>
 
-        </div>
+        
           <body style="margin: 20px;">      
         <div id="exp2" class="experiment">
     
@@ -177,7 +177,7 @@
  <body>     <div class="step">Now, add 1mL LB broth at 37<sup>o</sup>C for your selected recovery time under sterile conditions.</div></body>
       
         </body>
-        </div>
+        
   <body style="margin: 20px;">      
         <div id="exp3" class="experiment">
             
@@ -211,8 +211,8 @@
                 <textarea placeholder="Type your conclusion of the investigation here"></textarea>
         </body>
         </div>
-        
-   
+        </div>
+   </div>
     </div>
     
     <script>
@@ -235,26 +235,11 @@
                 reader.readAsDataURL(file);
             }
         }
-        
-        function addImage(event, containerId) {
-            const container = document.getElementById(containerId);
-            container.innerHTML = ''; // Clear previous images
-            Array.from(event.target.files).forEach(file => {
-                const img = document.createElement('img');
-                img.src = URL.createObjectURL(file);
-                container.appendChild(img);
-            });
+
+        function saveAsPDF() {
+            window.print();
         }
-        
-</head>
-<body>
-
-    <h3>Download your logbook:</h3>
-    <p>Click the button below to save this logbook as a PDF.</p>
-    <button onclick="window.print()">Save as PDF</button>
-
-</body>
-</html>
+   
     </script>
 </body>
 </html>
