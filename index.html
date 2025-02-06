@@ -8,14 +8,13 @@
     <style>
         body {
             font-family: Figtree, sans-serif;
-            margin: 0;
+            margin: 20px; /* Added margin */
             padding: 0;
         }
         .sidebar {
             position: fixed;
-            top: 50%;
-            left: 10px;
-            transform: translateY(-50%);
+            top: 10px;
+            right: 10px; /* Changed to top-right corner */
             display: flex;
             flex-direction: column;
             gap: 10px;
@@ -28,29 +27,35 @@
             border: none;
             border-radius: 5px;
         }
-        .container {
-            margin-left: 100px;
-            padding: 20px;
+        .container { max-width: 800px; margin: auto; 
         }
         .investigation {
             margin-bottom: 50px;
         }
         .image-container {
-            margin-top: 10px;
+            max-width: 100%; height: auto; margin-top: 10px;
         }
         textarea {
             width: 100%;
-            height: 150px; /* Increased height */
+            height: 100px; 
+            margin-top: 10px;
             font-size: 16px; /* Larger text */
         }
     </style>
 </head>
 <body>
-    <div class="sidebar">
-        <button onclick="scrollToSection('investigation1')">Investigation 1</button>
-        <button onclick="scrollToSection('investigation2')">Investigation 2</button>
-        <button onclick="scrollToSection('investigation3')">Investigation 3</button>
+  <div class="sidebar">
+        <button onclick="scrollToSection('exp1')">Investigation 1</button>
+        <button onclick="scrollToSection('exp2')">Investigation 2</button>
+        <button onclick="scrollToSection('exp3')">Investigation 3</button>
     </div>
+
+   <div class="container">
+        <h1>Applying Biotechnologies to Produce Human Insulin at GTAC </h1>
+        <h2>    Add your names here</h2>
+        <input type="text" id="studentNames" placeholder="Type your names here" style="width:100%; margin-bottom: 10px;">
+        
+
         <div id="exp1" class="experiment active">
             <h2>Investigation 1: Plasmid Diagnostics</h2>
              <h3>Learning intention: To analyse restriction digest results using DNA gel electrophoresis.</h3>
@@ -126,11 +131,7 @@
     </table>
 </body>
 </html>
-
-
-
-
-            h2>Modelling: Gel Electrophoresis</h2>
+            <h2>Modelling: Gel Electrophoresis</h2>
               <h4>Insert picture of your predicted eGel results </h4>
             <input type="file" accept="image/*" onchange="addImage(event, 'imageContainer1')">
             <div id="imageContainer1" class="image-container"></div>
@@ -210,8 +211,8 @@
 
         </div>
         
-        <button onclick="printAllExperiments()">Save as PDF</button>    
-        <button onclick="sendEmail()">Send PDF via Email</button>
+        <button onclick="savePageAsPDF()">Save as PDF</button>    
+  
     </div>
     
     <script>
@@ -245,22 +246,34 @@
             });
         }
         
-function printAllExperiments() {
-            let printWindow = window.open('', '_blank');
-            printWindow.document.write('<html><head><title>VCE301 Student Workbook</title></head><body>');
-            printWindow.document.write('</body></html>');
-            printWindow.document.close();
-            printWindow.print();
-        }
+        function savePageAsPDF() {
+    const studentNames = document.getElementById('studentNames').value;
+    if (!studentNames.trim()) {
+        alert("Please enter student names.");
+        return;
+    }
 
- function sendEmail() {
-            let studentNames = document.getElementById("studentNames").value || "GTAC VCE301 Student Workbook";
-            let subject = encodeURIComponent(studentNames);
-            let body = encodeURIComponent("Please find our student logbook attached.");
-            window.location.href = `mailto:?subject=${subject}&body=${body}`;
-        }
-        }
+    const today = new Date();
+    const date = today.toISOString().split('T')[0];
 
+    // Combine the date with the student names for the file name
+    const fileName = `${date}_${studentNames.replace(/\s+/g, '_')}_Report.pdf`;
+
+    // Create a new jsPDF instance
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    doc.html(document.body, {
+        callback: function (doc) {
+            // Save the PDF with the generated name
+            doc.save(fileName);
+        },
+        margin: [10, 10, 10, 10], 
+        // Optional: you can adjust margins
+        x: 10, // Optional: adjust content position
+        y: 10  // Optional: adjust content position
+    });
+}
     </script>
 </body>
 </html>
