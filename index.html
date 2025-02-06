@@ -174,11 +174,23 @@
               
                  <div id="imageContainer2" class="image-container"></div>
                 <input type="file" accept="image/*" onchange="addImage(event, 2)">
-              <h3>   Analysis of Results: Bacterial Transformation - Back at school      </h3>
 
-                <textarea placeholder="Fill in the blanks / long answer questions"></textarea>
+               <div> <h5>What is the purpose of the GFP gene in this transformation experiment? </h5></div>
+                <textarea placeholder="Type the purpose of GFP here"></textarea>
+                
+                <div><h5>What is the purpose of adding arabinose sugar to the growth media (LB/Amp/Ara)? </h5></div>
+                <textarea placeholder="Type the purpose of arabinose here"></textarea>
+                
+              <h3> Discussion:      </h3>
+                <h5>Answer the following questions:</h5>
+ <body>     <div class="step">1. What is the purpose of transforming bacteria?</div>
+    <div class="step">2. How will you know you have transformed bacteria? i.e. What are the expected results?</div>
+    <div class="step">3. What are some possible explanations for differences between the results you might see back at schoo? i.e. Limitations and errors?</div>
+</body>
+                <textarea placeholder="Type your response here"></textarea>
 
-
+                <h3> Conclusions:      </h3>
+                <textarea placeholder="Type your conclusion of the investigation here"></textarea>
     <script>
         function showExperiment(index) {
             document.querySelectorAll('.experiment').forEach(el => el.classList.remove('active'));
