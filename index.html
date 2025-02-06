@@ -27,16 +27,6 @@
         .container { max-width: 800px; margin: 20px; 
         }
         
-        .note {
-            position: absolute;
-            background: #f8f9fa;
-            padding: 10px;
-            width: 150px;
-            border-radius: 5px;
-            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-            text-align: left;
-            cursor: move;
-        }
         .investigation {
             margin-bottom: 50px;
         }
@@ -47,7 +37,6 @@
 </head>
 <body>
   <div class="sidebar">
-      <button onclick="addNote()">Add Note</button>
         <button onclick="scrollToSection('exp1')">Investigation 1</button>
         <button onclick="scrollToSection('exp2')">Investigation 2</button>
         <button onclick="scrollToSection('exp3')">Investigation 3</button>
@@ -283,40 +272,7 @@
         function saveAsPDF() {
             window.print();
         }
-        function addNote() {
-            let note = document.createElement("div");
-            note.className = "note";
-            note.contentEditable = "true";
-            note.innerText = "Type your note here...";
-            note.style.top = "100px";
-            note.style.left = "100px";
-            document.body.appendChild(note);
-            
-            note.onmousedown = function(event) {
-                let shiftX = event.clientX - note.getBoundingClientRect().left;
-                let shiftY = event.clientY - note.getBoundingClientRect().top;
 
-                function moveAt(pageX, pageY) {
-                    note.style.left = pageX - shiftX + 'px';
-                    note.style.top = pageY - shiftY + 'px';
-                }
-                
-                function onMouseMove(event) {
-                    moveAt(event.pageX, event.pageY);
-                }
-
-                document.addEventListener('mousemove', onMouseMove);
-
-                note.onmouseup = function() {
-                    document.removeEventListener('mousemove', onMouseMove);
-                    note.onmouseup = null;
-                };
-            };
-            
-            note.ondragstart = function() {
-                return false;
-            };
-        }
     </script>
 </body>
 </html>
