@@ -51,8 +51,9 @@
     </div>
 
    <div class="container">
-        <h1>Applying Biotechnologies to Produce Human Insulin at GTAC </h1>
-        <h2>    Add your names here</h2>
+        <p style="text-align: center;"><h1>Applying Biotechnologies to Produce Human Insulin at GTAC </h1></p>
+
+        <h2>    Add your names here:</h2>
         <input type="text" id="studentNames" placeholder="Type your names here" style="width:100%; margin-bottom: 10px;">
         
 
@@ -148,6 +149,7 @@
         </div>
         
         <div id="exp2" class="experiment">
+            <p style="margin: 20px;">
             <h2>Investigation 2: Bacterial Transformation</h2>
            <h3>Learning intention: To refine a lab protocol to transform bacteria with recombinant plasmids.</h3>
               
@@ -182,16 +184,23 @@
           <textarea placeholder="Insert recovery time here"></textarea>
  <body>     <div class="step">Now, add 1mL LB broth at 37<sup>o</sup>C for your selected recovery time under sterile conditions.</div></body>
       
-
+        </p>
         </div>
         
         <div id="exp3" class="experiment">
+            <p style="margin: 20px;">
             <h2>Investigation 3: Selecting for Transformed Bacteria</h2>
-            <h3>Learning intention: To justify my selection of transformed bacteria for use in insulin production.</h3>    
-             <h4> Results: Fluorescence microscopy              </h4>
-            <h5>Insert an image of your expected results </h5>
+            <h3>Learning intention: To justify my selection of transformed bacteria for use in insulin production.</h3>   
+                <h4>Modelling Activity: What is happening on each growth medium? </h4>
+                <h5>Insert an image of your completed modelling activity </h5>
             <input type="file" accept="image/*" onchange="addImage(event, 'imageContainer3')">
             <div id="imageContainer3" class="image-container"></div>
+            
+             <h4> Results: Fluorescence microscopy              </h4>
+            <h5>Insert an image of your expected results </h5>
+            <input type="file" accept="image/*" onchange="addImage(event, 'imageContainer4')">
+            <div id="imageContainer4" class="image-container"></div>
+            
              <div> <h5>What is the purpose of the GFP gene in this transformation experiment? </h5></div>
                 <textarea placeholder="Type the purpose of GFP here"></textarea>
                 
@@ -208,7 +217,7 @@
 
                 <h3> Conclusions:      </h3>
                 <textarea placeholder="Type your conclusion of the investigation here"></textarea>
-
+        </p>
         </div>
         
         <button onclick="savePageAsPDF()">Save as PDF</button>    
