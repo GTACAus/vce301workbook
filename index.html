@@ -32,7 +32,7 @@
         .image-container { max-width: 100%; height: auto; margin-top: 20px; }
         textarea { width: 100%; height: 100px; margin-top: 20px; }
         
-         .note {
+        .note {
             position: absolute;
             background: #f8f9fa;
             padding: 10px;
@@ -54,7 +54,17 @@
             cursor: pointer;
             border-radius: 3px;
         }
-    
+        .note .drag-handle {
+            width: 100%;
+            height: 10px;
+            background: #ccc;
+            cursor: grab;
+            margin-bottom: 5px;
+            text-align: center;
+            font-size: 10px;
+            font-weight: bold;
+            color: #555;
+        }
     </style>      
     
 </head>
@@ -298,11 +308,15 @@
             window.print();
         }
     
-         function addNote() {
+   function addNote() {
             let note = document.createElement("div");
             note.className = "note";
             note.contentEditable = "true";
             note.innerText = "Type to add note";
+            
+            let dragHandle = document.createElement("div");
+            dragHandle.className = "drag-handle";
+            dragHandle.innerText = "⬆⬇ Move";
             
             let deleteButton = document.createElement("button");
             deleteButton.innerText = "X";
@@ -311,6 +325,7 @@
                 note.remove();
             };
             
+            note.appendChild(dragHandle);
             note.appendChild(deleteButton);
             document.body.appendChild(note);
             
@@ -320,7 +335,7 @@
             note.style.top = (window.scrollY + viewportHeight / 2 - 50) + "px";
             note.style.left = (viewportWidth / 2 - 75) + "px";
             
-            note.onmousedown = function(event) {
+            dragHandle.onmousedown = function(event) {
                 let shiftX = event.clientX - note.getBoundingClientRect().left;
                 let shiftY = event.clientY - note.getBoundingClientRect().top;
 
@@ -335,13 +350,13 @@
 
                 document.addEventListener('mousemove', onMouseMove);
 
-                note.onmouseup = function() {
+                document.onmouseup = function() {
                     document.removeEventListener('mousemove', onMouseMove);
-                    note.onmouseup = null;
+                    document.onmouseup = null;
                 };
             };
             
-            note.ondragstart = function() {
+            dragHandle.ondragstart = function() {
                 return false;
             };
         }
