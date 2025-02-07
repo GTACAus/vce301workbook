@@ -43,15 +43,15 @@
         <button onclick="scrollToSection('exp1')">Investigation 1</button>
         <button onclick="scrollToSection('exp2')">Investigation 2</button>
         <button onclick="scrollToSection('exp3')">Investigation 3</button>
-        <button onclick="saveAsPDF()">Save as PDF</button>
-
+        <button onclick="saveAsPDF()">Print as PDF</button>
+        <button onclick="saveName()">Save</button> <p id="message"></p>
 </div>
 
    <div class="container">
         <p style="text-align: center;"><h1>Applying Biotechnologies to Produce Human Insulin at GTAC </h1></p>
 
-        <h2>    Your Names:</h2>
-        <input type="text" id="studentNames" placeholder="Type your names here" style="width:100%; margin-bottom: 10px;">
+        <label for="name">Enter your names:</label>
+        <input type="text" id="name" placeholder="Type your names here" style="width:100%; margin-bottom: 10px;">
         
        <img src="https://cdn.glitch.global/bedc10a6-54ca-4681-bce3-e9149cb53de3/recombinantplasmid?v=1738712387414" alt="Process of transforming bacteria with recombinant plasmid" style="width:100%;">
 
@@ -277,7 +277,22 @@
             window.print();
         }
     
-   
+        // Function to save data to sessionStorage
+        function saveName() {
+            let name = document.getElementById("name").value;
+            sessionStorage.setItem("username", name);
+            document.getElementById("message").innerText = "Saved! Refresh the page to test.";
+        }
+
+        // Function to retrieve data on page load
+        window.onload = function() {
+            let storedName = sessionStorage.getItem("username");
+            if (storedName) {
+                document.getElementById("name").value = storedName;
+                document.getElementById("message").innerText = `Welcome back, ${storedName}!`;
+            }
+        };
+
     </script>
 </body>
 </html>
