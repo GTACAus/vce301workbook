@@ -30,7 +30,7 @@
             margin-bottom: 50px;
         }
         .image-container { max-width: 100%; height: auto; margin-top: 20px; }
-        textarea { width: 100%; height: 100px; margin-top: 20px; }
+        .textarea { width: 100%; height: 100px; margin-top: 20px; }
         
  
         
@@ -60,7 +60,7 @@
              <h3>Learning intention: To analyse restriction digest results using DNA gel electrophoresis.</h3>
             <img src="https://cdn.glitch.global/bedc10a6-54ca-4681-bce3-e9149cb53de3/orivsrecombinantplasmidmap?v=1738715311314" alt="Plasmid map comparison" style="width:100%;">
             <h4>  Identify 4 differences between the Original and the Recombinant Plasmid Maps </h4>
-                <textarea placeholder="List 4 differences as you compare the Original and the Recombinant Plasmid Maps"></textarea>
+                <textarea id="notes" placeholder="List 4 differences as you compare the Original and the Recombinant Plasmid Maps"></textarea>
 
 <html lang="en">
 <head>
@@ -103,29 +103,29 @@
         <tr>
             <td>EcoRV
                 <div>
-              NheI</div></td>
+              NheI</div></td> <textarea id="notes">
             <td contenteditable="true"></td>
             <td contenteditable="true"></td>
             <td contenteditable="true"></td>
-            <td contenteditable="true"></td>
+            <td contenteditable="true"></td> </textarea>
         </tr>
         <tr>
             <td>EcoRV <div>
               XhoI
-              </div></td>
+              </div></td> <textarea id="notes"> 
             <td contenteditable="true"></td>
             <td contenteditable="true"></td>
             <td contenteditable="true"></td>
-            <td contenteditable="true"></td>
+            <td contenteditable="true"></td> </textarea>
         </tr>
         <tr>
             <td>NheI <div>
               SmaI
-              </div></td>
+              </div></td> <textarea id="notes"
             <td contenteditable="true"></td>
             <td contenteditable="true"></td>
             <td contenteditable="true"></td>
-            <td contenteditable="true"></td>
+            <td contenteditable="true"></td> </textarea>
         </tr>
     </table>
 </body>
@@ -145,7 +145,7 @@
             <h2>Analysis: DNA Gel Electrophoresis results </h2>
               <h4>Identify the tube that contains the recombinant plasmids (Tube 1 or Tube 2?). 
                 <div>  Justify your answer. </div> </h4>
-                <textarea placeholder="Type your answer here"></textarea></div>
+                <textarea id="notes" placeholder="Type your answer here"></textarea></div>
 
         
           <body style="margin: 20px;">      
@@ -183,7 +183,7 @@
               
               <img src="https://cdn.glitch.global/bedc10a6-54ca-4681-bce3-e9149cb53de3/Cacl2%20conc%20graph.png?v=1738719272040" alt="CaCl2 graph" style="width:100%;">
               <h5> Use this data to decide the Calcium chloride concentration that you will use with your bacteria </h5>
-                <textarea placeholder="Select the concentration of CaCl2 here. Describe why we use Calcium chloride."></textarea>
+                <textarea id="notes" placeholder="Select the concentration of CaCl2 here. Describe why we use Calcium chloride."></textarea>
              
 
               
@@ -192,14 +192,14 @@
 
              <h4> Select the temperature and time for heat shock using the provided data </h4>
 
-               <textarea placeholder="Type your selected conditions for heat shock here"></textarea>
+               <textarea id="notes" placeholder="Type your selected conditions for heat shock here"></textarea>
                             <div> <h4> What is the purpose of heat shock? </h4> </div>  
-                <textarea placeholder="Type the purpose of heat shock here"></textarea>
+                <textarea id="notes" placeholder="Type the purpose of heat shock here"></textarea>
           
             <h4><p style="color:#4c34e4">Step 3: Recovery </p> </h4>
           <h4>           Use the data to determine the recovery time for your transformation protocol. </h4>
                  <img src="https://cdn.glitch.global/fcc4e6ca-0f57-4233-b69a-10230c4b69f6/recoverytime?v=1738795693224" alt="Recovery Time graph" style="width:100%;">
-          <textarea placeholder="Insert recovery time here"></textarea>
+          <textarea id="notes" placeholder="Insert recovery time here"></textarea>
 
             
 
@@ -215,17 +215,17 @@
 
 
              <div> <h4>Describe the purpose of GFP and a limitation of using it in bacterial tranformation. </h4></div>
-                <textarea placeholder="Type your response here"></textarea>
+                <textarea id="notes" placeholder="Type your response here"></textarea>
           
             <div> <h4><p style="color:#ff6d3a"> Hypothesis: </p> How will you know that you have selected transformed bacteria?</h4></div>
-                <textarea placeholder="It is expected that..."></textarea>
+                <textarea id="notes" placeholder="It is expected that..."></textarea>
             
                 <h4>Modelling Activity: What is happening on each growth medium? </h4>
                 <h5>Insert an image of your completed modelling activity here </h5>
             <input type="file" accept="image/*" onchange="addImage(event, 'imageContainer3')">
             <div id="imageContainer3" class="image-container"></div>
             <h5> Using the model, summarise the purpose of the ingredients added to the growth media (LB/Ampicillin/Arabinose) </h5></div>
-                <textarea placeholder="Record the purpose of LB, Ampicillin and Arabinose sugar here... "></textarea>
+                <textarea id="notes" placeholder="Record the purpose of LB, Ampicillin and Arabinose sugar here... "></textarea>
             
              <h4> Results: Fluorescence microscopy              </h4>
             <h5>Insert an image of your bacteria viewed through the Fluorescent microscope (EVOS) </h5>
@@ -245,10 +245,10 @@
     <br>i.e. Limitations and errors?</br>
 </p>
       
-                <textarea placeholder="Type your discussion here"></textarea>
+                <textarea id="notes" placeholder="Type your discussion here"></textarea>
 
                 <h3> Conclusion (Back at school):      </h3>
-                <textarea placeholder="Write your conclusions here"></textarea>
+                <textarea id="notes" placeholder="Write your conclusions here"></textarea>
         </body>
         </div>
         </div>
@@ -283,19 +283,53 @@
         // Function to save data to sessionStorage
         function saveName() {
             let name = document.getElementById("name").value;
-            sessionStorage.setItem("username", name);
-            document.getElementById("message").innerText = "Saved! Refresh the page to test.";
+            sessionStorage.setItem("username", name); 
+            sessionStorage.setItem("notes", notes);
+            document.getElementById("message").innerText = "Saved! ";
         }
 
-        // Function to retrieve data on page load
-        window.onload = function() {
-            let storedName = sessionStorage.getItem("username");
-            if (storedName) {
-                document.getElementById("name").value = storedName;
-                document.getElementById("message").innerText = `Welcome back, ${storedName}!`;
+             // Save image if uploaded
+            let imageElement = document.getElementById("previewImage");
+            if (imageElement.src) {
+                sessionStorage.setItem("savedImage", imageElement.src);
             }
-        };
 
+            document.getElementById("message").innerText = "Saved!";
+        }
+
+        function loadData() {
+            let storedName = sessionStorage.getItem("username");
+            let storedNotes = sessionStorage.getItem("notes");
+            let storedImage = sessionStorage.getItem("savedImage");
+
+            if (storedName) document.getElementById("name").value = storedName;
+            if (storedNotes) document.getElementById("notes").value = storedNotes;
+            if (storedImage) {
+                let img = document.getElementById("previewImage");
+                img.src = storedImage;
+                img.style.display = "block";
+            }
+        }
+
+        // Handle image upload and convert to Base64
+        document.getElementById("imageUpload").addEventListener("change", function(event) {
+            let file = event.target.files[0];
+            if (file) {
+                let reader = new FileReader();
+                reader.onload = function(e) {
+                    let img = document.getElementById("previewImage");
+                    img.src = e.target.result;
+                    img.style.display = "block";
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Load saved data on page load
+        window.onload = loadData;
+
+
+        
     </script>
 </body>
 </html>
