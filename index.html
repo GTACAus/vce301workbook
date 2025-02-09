@@ -50,8 +50,8 @@
    <div class="container">
         <p style="text-align: center;"><h1>Applying Biotechnologies to Produce Human Insulin at GTAC </h1></p>
 
-        <h2>    Your Names:</h2>
-        <input type="text" id="studentNames" placeholder="Type your names here" style="width:100%; margin-bottom: 10px;">
+        <h2>    Enter Your Names:</h2>
+        <textarea id="experiment1" placeholder="Type your names here"></textarea>
         
        <img src="https://cdn.glitch.global/bedc10a6-54ca-4681-bce3-e9149cb53de3/recombinantplasmid?v=1738712387414" alt="Process of transforming bacteria with recombinant plasmid" style="width:100%;">
 
@@ -60,7 +60,7 @@
              <h3>Learning intention: To analyse restriction digest results using DNA gel electrophoresis.</h3>
             <img src="https://cdn.glitch.global/bedc10a6-54ca-4681-bce3-e9149cb53de3/orivsrecombinantplasmidmap?v=1738715311314" alt="Plasmid map comparison" style="width:100%;">
             <h4>  Identify 4 differences between the Original and the Recombinant Plasmid Maps </h4>
-                <textarea placeholder="List 4 differences as you compare the Original and the Recombinant Plasmid Maps"></textarea>
+                <textarea id="experiment2" placeholder="List 4 differences as you compare the Original and the Recombinant Plasmid Maps"></textarea>
 
 <html lang="en">
 <head>
@@ -136,17 +136,20 @@
               <h4>Insert picture of your predicted eGel results </h4>
             <input type="file" accept="image/*" onchange="addImage(event, 'imageContainer1')">
             <div id="imageContainer1" class="image-container"></div>
-            
-            <h2>Results: Gel Electrophoresis </h2>
+             <textarea id="experiment3" placeholder="Summarise what is occurring during Gel Electrophoresis"></textarea></div>
+           
+       <h2>Results: Gel Electrophoresis </h2>
             <img src="https://cdn.glitch.global/fcc4e6ca-0f57-4233-b69a-10230c4b69f6/eGelloadedlanes?v=1738890443008" alt="Egel Lanes" style="width:80%;">
 
               <h4>Insert picture of the eGel results </h4>
             <input type="file" accept="image/*" onchange="addImage(event, 'imageContainer2')">
+
+            
             <div id="imageContainer2" class="image-container"></div>
             <h2>Analysis: DNA Gel Electrophoresis results </h2>
               <h4>Identify the tube that contains the recombinant plasmids (Tube 1 or Tube 2?). 
                 <div>  Justify your answer. </div> </h4>
-                <textarea placeholder="Type your answer here"></textarea></div>
+                <textarea id="experiment4" placeholder="Type your answer here"></textarea></div>
 
         
           <body style="margin: 20px;">      
@@ -184,7 +187,7 @@
               
               <img src="https://cdn.glitch.global/bedc10a6-54ca-4681-bce3-e9149cb53de3/Cacl2%20conc%20graph.png?v=1738719272040" alt="CaCl2 graph" style="width:100%;">
               <h5> Use this data to decide the Calcium chloride concentration that you will use with your bacteria </h5>
-                <textarea placeholder="Select the concentration of CaCl2 here. Describe why we use Calcium chloride"></textarea>
+                <textarea id="experiment5" placeholder="Select the concentration of CaCl2 here. Describe why we use Calcium chloride"></textarea>
              
 
               
@@ -193,13 +196,13 @@
 
              <h4> Select the temperature and time for heat shock using the provided data </h4>
 
-               <textarea placeholder="Type your selected conditions for heat shock here"></textarea>
+               <textarea id="experiment6" placeholder="Type your selected conditions for heat shock here"></textarea>
                             <div> <h5> What is the purpose of heat shock? </h5> </div>  
-                <textarea placeholder="Type the purpose of heat shock here"></textarea>
+                <textarea id="experiment7" placeholder="Type the purpose of heat shock here"></textarea>
                <h4>Step 3: Recovery  </h4>
           <h5>           Use the data to determine the recovery time for your transformation protocol. </h5>
                  <img src="https://cdn.glitch.global/fcc4e6ca-0f57-4233-b69a-10230c4b69f6/recoverytime?v=1738795693224" alt="Recovery Time graph" style="width:100%;">
-          <textarea placeholder="Insert recovery time here"></textarea>
+          <textarea id="experiment8" placeholder="Insert recovery time here"></textarea>
 
             
 
@@ -215,17 +218,17 @@
 
 
              <div> <h5>Describe the purpose of GFP and a limitation of using it in bacterial tranformation. </h5></div>
-                <textarea placeholder="Type your response here"></textarea>
+                <textarea id="experiment9" placeholder="Type your response here"></textarea>
           
             <div> <h4> Hypothesis: How will you know that you have selected transformed bacteria?</h4></div>
-                <textarea placeholder="It is expected that..."></textarea>
+                <textarea id="experiment10" placeholder="It is expected that..."></textarea>
             
                 <h4>Modelling Activity: What is happening on each growth medium? </h4>
                 <h5>Insert an image of your completed modelling activity here </h5>
             <input type="file" accept="image/*" onchange="addImage(event, 'imageContainer3')">
             <div id="imageContainer3" class="image-container"></div>
             <h5> Using the model, summarise the purpose of the ingredients added to the growth media (LB/Ampicillin/Arabinose) </h5></div>
-                <textarea placeholder="Record the purpose of the ingredients in the growth media (LB, Ampicillin and arabinose sugar)"></textarea>
+                <textarea id="experiment11" placeholder="Record the purpose of the ingredients in the growth media (LB, Ampicillin and arabinose sugar)"></textarea>
             
              <h4> Results: Fluorescence microscopy              </h4>
             <h5>Insert an image of your bacteria viewed through the Fluorescent microscope (EVOS) </h5>
@@ -245,10 +248,10 @@
 <br> i.e. Limitations and errors?</br>
 </p>
       
-                <textarea placeholder="Type your response here"></textarea>
+                <textarea id="experiment12" placeholder="Type your response here"></textarea>
 
                 <h3> Conclusion (back at school):      </h3>
-                <textarea placeholder="Write your conclusions here"></textarea>
+                <textarea id="experiment13" placeholder="Write your conclusions here"></textarea>
         </body>
         </div>
         </div>
@@ -279,8 +282,51 @@
         function saveAsPDF() {
             window.print();
         }
-    
-   
+        
+        document.addEventListener("DOMContentLoaded", function() {
+            // Restore text areas
+            document.querySelectorAll("textarea").forEach(textarea => {
+                const savedText = sessionStorage.getItem(textarea.id);
+                if (savedText !== null) {
+                    textarea.value = savedText;
+                }
+                textarea.addEventListener("input", () => {
+                    sessionStorage.setItem(textarea.id, textarea.value);
+                });
+            });
+
+            // Restore editable table cells
+            document.querySelectorAll("td[contenteditable=true]").forEach((cell, index) => {
+                const savedCellText = sessionStorage.getItem(`cell-${index}`);
+                if (savedCellText !== null) {
+                    cell.innerText = savedCellText;
+                }
+                cell.addEventListener("input", () => {
+                    sessionStorage.setItem(`cell-${index}`, cell.innerText);
+                });
+            });
+            
+            // Restore uploaded image
+            const uploadedImage = document.getElementById("uploadedImage");
+            const savedImage = sessionStorage.getItem("uploadedImage");
+            if (savedImage) {
+                uploadedImage.src = savedImage;
+                uploadedImage.style.display = "block";
+            }
+            
+            document.getElementById("imageUpload").addEventListener("change", function(event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        uploadedImage.src = e.target.result;
+                        uploadedImage.style.display = "block";
+                        sessionStorage.setItem("uploadedImage", e.target.result);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        });
     </script>
 </body>
 </html>
