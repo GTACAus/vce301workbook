@@ -4,10 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GTAC VCE301 Student Logbook</title>
-    </head>
 
     <style>
-        body { font-family: Figtree, sans-serif; text-align: center; margin: 20px; max-width: calc(100% - 40px);}
+        body { font-family: Figtree, sans-serif; text-align: center; margin: 20px;}
 
         .sidebar {
             position: fixed;
@@ -35,6 +34,7 @@
          
         
     </style>      
+    </head>
 
 <body>
   <div class="sidebar">
@@ -43,7 +43,6 @@
         <button onclick="scrollToSection('exp2')">Investigation 2</button>
         <button onclick="scrollToSection('exp3')">Investigation 3</button>
         <button onclick="saveAsPDF()">Save as PDF</button>
-
 </div>
 
    <div class="container">
@@ -61,10 +60,7 @@
             <h4>  Identify 4 differences between the Original and the Recombinant Plasmid Maps </h4>
                 <textarea id="experiment2" placeholder="List 4 differences as you compare the Original and the Recombinant Plasmid Maps"></textarea>
 
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Results: Modelling Double digest on plasmids</title>
     <style>
         table {
@@ -83,7 +79,7 @@
             background-color: #eaf7ff;
         }
     </style>
-</head>
+
 <body>
     <h2>Results: Modelling Double digest on plasmids</h2>
     <table>
@@ -130,7 +126,7 @@
     <p> Ignore fragments if they are less than 30 bp – they cannot be detected experimentally</p>
 
 </body>
-</html>
+
             <h2>Modelling: Gel Electrophoresis</h2>
               <h4>Insert picture of your predicted eGel results </h4>
             <input type="file" accept="image/*" onchange="addImage(event, 'imageContainer1')">
@@ -148,15 +144,16 @@
             <h2>Analysis: DNA Gel Electrophoresis results </h2>
               <h4>Identify the tube that contains the recombinant plasmids (Tube 1 or Tube 2?). 
                 <div>  Justify your answer. </div> </h4>
-                <textarea id="experiment4" placeholder="Type your answer here"></textarea></div>
+                <textarea id="experiment4" placeholder="Type your answer here"></textarea>
 
         
-          <body style="margin: 20px;">      
+  
         <div id="exp2" class="experiment">
-    
+
+  
             <h2>Investigation 2: Bacterial Transformation</h2>
            <h3>Learning intention: To refine a lab protocol to transform bacteria with recombinant plasmids.</h3>
-                <style>
+    <style>
         .image-container {
             display: flex;
             justify-content: center;
@@ -164,15 +161,14 @@
         }
         .image-container img {
             width: 48%; /* Adjust width to fit side by side */
-            max-width: 600px; /* Prevents images from getting too large */
+            max-width: 800; /* Prevents images from getting too large */
             height: auto; /* Maintains aspect ratio */
             border-radius: 10px; /* Optional: Adds rounded corners */
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Adds a shadow */
         }
     </style>
-</head>
-<body>
 
+<body>
     <div class="image-container">
         <img src="https://cdn.glitch.global/bedc10a6-54ca-4681-bce3-e9149cb53de3/Investigation2?v=1738727664648" alt="Example Image">
         <img src="https://cdn.glitch.global/fcc4e6ca-0f57-4233-b69a-10230c4b69f6/investigation2protocol?v=1738817484920" alt="Transformation Protocol">
@@ -202,11 +198,8 @@
           <h5>           Use the data to determine the recovery time for your transformation protocol. </h5>
                  <img src="https://cdn.glitch.global/fcc4e6ca-0f57-4233-b69a-10230c4b69f6/recoverytime?v=1738795693224" alt="Recovery Time graph" style="width:100%;">
           <textarea id="experiment8" placeholder="Insert recovery time here"></textarea>
-
-            
-
+    
       
-        </body>
         
   <body style="margin: 20px;">      
         <div id="exp3" class="experiment">
@@ -226,7 +219,7 @@
                 <h5>Insert an image of your completed modelling activity here </h5>
             <input type="file" accept="image/*" onchange="addImage(event, 'imageContainer3')">
             <div id="imageContainer3" class="image-container"></div>
-            <h5> Using the model, summarise the purpose of the ingredients added to the growth media (LB/Ampicillin/Arabinose) </h5></div>
+            <h5> Using the model, summarise the purpose of the ingredients added to the growth media (LB/Ampicillin/Arabinose) </h5>
                 <textarea id="experiment11" placeholder="Record the purpose of the ingredients in the growth media (LB, Ampicillin and arabinose sugar)"></textarea>
             
              <h4> Results: Fluorescence microscopy              </h4>
@@ -242,20 +235,21 @@
               <h3> Discussion:      </h3>
                 <h5>Consider the following questions:</h5>
 <p style="text-align:left"> 
-1. What is the purpose of transforming bacteria?
-<br>2. What are some possible explanations for differences between the results you might see back at school? </br> 
-<br> i.e. Limitations and errors?</br>
+1. What is the purpose of transforming bacteria? 
+<br> 2. What are some possible explanations for differences between the results you might see back at school? </br>
+<br> i.e. Limitations and errors? </br>
 </p>
       
                 <textarea id="experiment12" placeholder="Type your response here"></textarea>
 
                 <h3> Conclusion (back at school):      </h3>
                 <textarea id="experiment13" placeholder="Write your conclusions here"></textarea>
-        </body>
-        </div>
-        </div>
-   </div>
-    </div>
+
+</div>
+</div>
+</div>
+</div>
+</div>
     
     <script>
         function scrollToSection(id) {
