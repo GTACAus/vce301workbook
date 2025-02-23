@@ -10,7 +10,7 @@
 
         .sidebar {
             position: fixed;
-            top: 10px;
+            top: 40px;
             right: 10px;
             display: flex;
             flex-direction: column;
@@ -38,12 +38,18 @@
 
 <body>
   <div class="sidebar">
-              
-        <button onclick="scrollToSection('exp1')">Investigation 1</button>
-        <button onclick="scrollToSection('exp2')">Investigation 2</button>
-        <button onclick="scrollToSection('exp3')">Investigation 3</button>
-        <button onclick="saveAsPDF()">Save as PDF</button>
-</div>
+        
+        <br><br><br>
+        <img
+          src="https://gtac.edu.au/wp-content/themes/gtac/assets/images/logo-2024.png"
+          id="logoImage"
+          style="width: 40%; opacity: 0.5;"
+        />
+        <button onclick="scrollToSection('investigation1')">Investigation 1</button>
+        <button onclick="scrollToSection('investigation2')">Investigation 2</button>
+        <button onclick="scrollToSection('investigation3')">Investigation 3</button>
+        <button onclick="printPageAsPDF()">Save as PDF</button>
+    </div>
 
    <div class="container">
         <p style="text-align: center;"><h1>Applying Biotechnologies to Produce Human Insulin at GTAC </h1></p>
@@ -245,76 +251,148 @@
 </div>
 </div>
 </div>
-    
+
     <script>
-        function scrollToSection(id) {
-            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        // ------------------------------------------------------------------------
+        // Scroll to Section Function
+        // ------------------------------------------------------------------------
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
         }
-        
-        function addImage(event, containerId) {
+
+        // ------------------------------------------------------------------------
+        // Add Uploaded Image Function
+        // ------------------------------------------------------------------------
+        function addUploadedImage(event, containerId) {
             const container = document.getElementById(containerId);
             const file = event.target.files[0];
             if (file) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    const img = document.createElement("img");
-                    img.src = e.target.result;
-                    img.style.maxWidth = "100%";
+                    const image = document.createElement("img");
+                    image.src = e.target.result;
+                    image.style.maxWidth = "100%";
                     container.innerHTML = "";
-                    container.appendChild(img);
+                    container.appendChild(image);
                 };
                 reader.readAsDataURL(file);
             }
         }
 
-        function saveAsPDF() {
+        // ------------------------------------------------------------------------
+        // Print Page as PDF
+        // ------------------------------------------------------------------------
+        function printPageAsPDF() {
             window.print();
         }
-        
+
+        // ------------------------------------------------------------------------
+        // Save and Restore (Session and Local Storage)
+        // ------------------------------------------------------------------------
         document.addEventListener("DOMContentLoaded", function() {
-            // Restore text areas
+            // Restore text areas from Session Storage on page load
             document.querySelectorAll("textarea").forEach(textarea => {
                 const savedText = sessionStorage.getItem(textarea.id);
                 if (savedText !== null) {
                     textarea.value = savedText;
                 }
+                // Save changes to both Session Storage and Local Storage
                 textarea.addEventListener("input", () => {
                     sessionStorage.setItem(textarea.id, textarea.value);
+                    localStorage.setItem(textarea.id, textarea.value);
                 });
             });
 
-            // Restore editable table cells
-            document.querySelectorAll("td[contenteditable=true]").forEach((cell, index) => {
+            // Restore editable table cells from Session Storage on page load
+            const editableCells = document.querySelectorAll("td[contenteditable=true]");
+            editableCells.forEach((cell, index) => {
                 const savedCellText = sessionStorage.getItem(`cell-${index}`);
                 if (savedCellText !== null) {
                     cell.innerText = savedCellText;
                 }
+                // Save changes to both Session Storage and Local Storage
                 cell.addEventListener("input", () => {
                     sessionStorage.setItem(`cell-${index}`, cell.innerText);
+                    localStorage.setItem(`cell-${index}`, cell.innerText);
                 });
             });
-            
-            // Restore uploaded image
+
+            // Restore the uploaded image from Session Storage if desired (not strictly required, but included here)
             const uploadedImage = document.getElementById("uploadedImage");
-            const savedImage = sessionStorage.getItem("uploadedImage");
-            if (savedImage) {
-                uploadedImage.src = savedImage;
-                uploadedImage.style.display = "block";
+            if (uploadedImage) {
+                const savedImageData = sessionStorage.getItem("uploadedImage");
+                if (savedImageData) {
+                    uploadedImage.src = savedImageData;
+                    uploadedImage.style.display = "block";
+                }
             }
+        });
+
+        // ------------------------------------------------------------------------
+        // Triple Click Detection for Logo
+        // ------------------------------------------------------------------------
+        let clickCount = 0;
+        let firstClickTime = 0;
+
+        document.getElementById("logoImage").addEventListener("click", detectTripleClick);
+
+        function detectTripleClick() {
+            const currentTime = new Date().getTime();
             
-            document.getElementById("imageUpload").addEventListener("change", function(event) {
-                const file = event.target.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        uploadedImage.src = e.target.result;
-                        uploadedImage.style.display = "block";
-                        sessionStorage.setItem("uploadedImage", e.target.result);
-                    };
-                    reader.readAsDataURL(file);
+            // If no clicks yet, initialize
+            if (clickCount === 0) {
+                clickCount = 1;
+                firstClickTime = currentTime;
+            } else {
+                // If current time is still within 1 second of the first click
+                if (currentTime - firstClickTime <= 1000) {
+                    clickCount++;
+                    // If we reach 3 clicks within 1 second, prompt for password
+                    if (clickCount === 3) {
+                        promptForPassword();
+                        // Reset click counter and time
+                        clickCount = 0;
+                        firstClickTime = 0;
+                    }
+                } else {
+                    // More than 1 second has passed since the first click,
+                    // so reset and start over
+                    clickCount = 1;
+                    firstClickTime = currentTime;
+                }
+            }
+        }
+
+        // ------------------------------------------------------------------------
+        // Prompt for Password
+        // ------------------------------------------------------------------------
+        function promptForPassword() {
+            const userPassword = prompt("Please enter the password:");
+            if (userPassword === "Abc") {
+                restoreLocalStorageData();
+            }
+        }
+
+        // ------------------------------------------------------------------------
+        // Restore from Local Storage
+        // ------------------------------------------------------------------------
+        function restoreLocalStorageData() {
+            // Restore text areas from Local Storage
+            document.querySelectorAll("textarea").forEach(textarea => {
+                const localStorageValue = localStorage.getItem(textarea.id);
+                if (localStorageValue !== null) {
+                    textarea.value = localStorageValue;
                 }
             });
-        });
+
+            // Restore table cells from Local Storage
+            document.querySelectorAll("td[contenteditable=true]").forEach((cell, index) => {
+                const localStorageCellText = localStorage.getItem(`cell-${index}`);
+                if (localStorageCellText !== null) {
+                    cell.innerText = localStorageCellText;
+                }
+            });
+        }
     </script>
 </body>
 </html>
