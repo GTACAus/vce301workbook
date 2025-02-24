@@ -512,6 +512,20 @@ function restoreLocalStorageData() {
     // Close the overlay as before
     closeOverlay();
 }
+        // Function to restore a static image to the specified container
+function restoreImage(containerId, imageSrc) {
+    const container = document.getElementById(containerId);
+    if (container) {
+        const image = document.createElement("img");
+        image.src = imageSrc; // Path to the static image
+        image.style.maxWidth = "100%";
+        container.innerHTML = ""; // Clear any previous content
+        container.appendChild(image);
+    } else {
+        console.error(`Container ${containerId} not found.`);
+    }
+}
+
     // Function to Clear All Images from IndexedDB and UI
 function clearAllImages() {
     openDB().then(db => {
