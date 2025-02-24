@@ -261,24 +261,100 @@
             document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
         }
 
-        // ------------------------------------------------------------------------
-        // Add Uploaded Image Function
-        // ------------------------------------------------------------------------
-        function addUploadedImage(event, containerId) {
-            const container = document.getElementById(containerId);
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const image = document.createElement("img");
-                    image.src = e.target.result;
-                    image.style.maxWidth = "100%";
-                    container.innerHTML = "";
-                    container.appendChild(image);
-                };
-                reader.readAsDataURL(file);
-            }
+        const DB_NAME = "imageStore";
+    const DB_VERSION = 1;
+    const IMAGE_EXPIRY = 12 * 60 * 60 * 1000; // 12 hours in milliseconds
+
+    // Open IndexedDB
+    function openDB() {
+        return new Promise((resolve, reject) => {
+            const request = indexedDB.open(DB_NAME, DB_VERSION);
+            request.onupgradeneeded = function (event) {
+                const db = event.target.result;
+                if (!db.objectStoreNames.contains("images")) {
+                    db.createObjectStore("images", { keyPath: "id" });
+                }
+            };
+            request.onsuccess = function (event) {
+                resolve(event.target.result);
+            };
+            request.onerror = function (event) {
+                reject("Error opening database:", event.target.error);
+            };
+        });
+    }
+
+    // Save Image to IndexedDB
+    function saveImageToDB(containerId, imageData) {
+        openDB().then(db => {
+            const transaction = db.transaction("images", "readwrite");
+            const store = transaction.objectStore("images");
+            const imageEntry = { id: containerId, image: imageData, timestamp: Date.now() };
+            store.put(imageEntry);
+        });
+    }
+
+    // Retrieve and Restore Images from IndexedDB
+    function restoreImagesFromDB() {
+        openDB().then(db => {
+            const transaction = db.transaction("images", "readonly");
+            const store = transaction.objectStore("images");
+            const request = store.getAll();
+
+            request.onsuccess = function () {
+                const images = request.result;
+                const currentTime = Date.now();
+                images.forEach(imageEntry => {
+                    if (currentTime - imageEntry.timestamp <= IMAGE_EXPIRY) {
+                        displayImage(imageEntry.image, imageEntry.id);
+                    } else {
+                        // Remove expired images
+                        removeImageFromDB(imageEntry.id);
+                    }
+                });
+            };
+        });
+    }
+
+    // Remove Image from IndexedDB
+    function removeImageFromDB(containerId) {
+        openDB().then(db => {
+            const transaction = db.transaction("images", "readwrite");
+            const store = transaction.objectStore("images");
+            store.delete(containerId);
+        });
+    }
+
+    // Function to Display Image in its Container
+    function displayImage(imageData, containerId) {
+        const container = document.getElementById(containerId);
+        if (container) {
+            const image = document.createElement("img");
+            image.src = imageData;
+            image.style.maxWidth = "100%";
+            container.innerHTML = "";
+            container.appendChild(image);
         }
+    }
+
+    // Modified Upload Image Function to Store in IndexedDB
+    function addUploadedImage(event, containerId) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const imageData = e.target.result;
+                saveImageToDB(containerId, imageData); // Store image
+                displayImage(imageData, containerId); // Display image
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+
+    // Restore Images on Page Load
+    document.addEventListener("DOMContentLoaded", function () {
+        restoreImagesFromDB();
+    });
 
         // ------------------------------------------------------------------------
         // Print Page as PDF
@@ -436,18 +512,6 @@ function restoreLocalStorageData() {
     // Close the overlay as before
     closeOverlay();
 }
-
-function restoreImage(containerId, imageName) {
-    const container = document.getElementById(containerId);
-    if (container) {
-        const image = document.createElement("img");
-        image.src = imageName; // Uses relative path assuming images are in the same folder
-        image.style.maxWidth = "100%";
-        container.innerHTML = ""; // Clear existing content
-        container.appendChild(image);
-    }
-}
-
 
     </script>
 <!-- Overlay for Password-Protected Actions -->
