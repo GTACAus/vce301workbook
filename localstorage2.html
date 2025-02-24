@@ -317,15 +317,7 @@
                 });
             });
 
-            // Restore the uploaded image from Session Storage if desired (not strictly required, but included here)
-            const uploadedImage = document.getElementById("uploadedImage");
-            if (uploadedImage) {
-                const savedImageData = sessionStorage.getItem("uploadedImage");
-                if (savedImageData) {
-                    uploadedImage.src = savedImageData;
-                    uploadedImage.style.display = "block";
-                }
-            }
+            
         });
 
         // ------------------------------------------------------------------------
