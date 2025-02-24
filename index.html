@@ -270,9 +270,14 @@
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     const image = document.createElement("img");
-                    image.src = e.target.result;
-                    image.style.maxWidth = "100%";
-                    container.innerHTML = "";
+                    img.src = e.target.result;
+            img.style.width = "100%";  // Ensures the image is full width
+            img.style.maxHeight = "600px"; // Limits excessive height but keeps it large
+            img.style.objectFit = "contain"; // Prevents distortion
+            img.style.marginTop = "20px";  // Adds spacing
+            img.style.borderRadius = "10px"; // Optional: Soft corners
+            img.style.boxShadow = "0px 4px 8px rgba(0, 0, 0, 0.2)"; // Optional: Adds depth
+            container.innerHTML = ""; // Clears previous images
                     container.appendChild(image);
                 };
                 reader.readAsDataURL(file);
