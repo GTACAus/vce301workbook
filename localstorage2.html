@@ -134,7 +134,7 @@
 </body>
 
             <h2>Modelling: Gel Electrophoresis</h2>
-              <h4 style="color:#ff6d3a;">Insert picture of your predicted eGel results </h4>
+              <h4 style="color:#ff6d3a;">Insert picture of your predicted eGel results.</h4> <p>Please open your Camera app, take your photo, then choose your file from Photo Library</p> 
             <input type="file" accept="image/*" onchange="addUploadedImage(event, 'imageContainer1')">
             <div id="imageContainer1" class="image-container"></div>
             <h3 style="color:#ff6d3a;">Summarise what is occurring during Gel Electrophoresis </h3>
@@ -299,7 +299,12 @@
                 // Save changes to both Session Storage and Local Storage
                 textarea.addEventListener("input", () => {
                     sessionStorage.setItem(textarea.id, textarea.value);
-                    localStorage.setItem(textarea.id, textarea.value);
+                    // Local Storage now includes a timestamp
+                    const dataToStore = {
+                      value: textarea.value,
+                      timestamp: Date.now()
+                    };
+                    localStorage.setItem(textarea.id, JSON.stringify(dataToStore));
                 });
             });
 
@@ -313,7 +318,12 @@
                 // Save changes to both Session Storage and Local Storage
                 cell.addEventListener("input", () => {
                     sessionStorage.setItem(`cell-${index}`, cell.innerText);
-                    localStorage.setItem(`cell-${index}`, cell.innerText);
+                    // Save to Local Storage with timestamp
+                    const dataToStore = {
+                      value: cell.innerText,
+                      timestamp: Date.now()
+                    };
+                    localStorage.setItem(`cell-${index}`, JSON.stringify(dataToStore));
                 });
             });
 
@@ -385,21 +395,45 @@ function closeOverlay() {
 function restoreLocalStorageData() {
     // Restore text areas from Local Storage
     document.querySelectorAll("textarea").forEach(textarea => {
-        const localStorageValue = localStorage.getItem(textarea.id);
-        if (localStorageValue !== null) {
-            textarea.value = localStorageValue;
+        const storedJson = localStorage.getItem(textarea.id);
+        if (storedJson) {
+            try {
+                const parsed = JSON.parse(storedJson);
+                if (Date.now() - parsed.timestamp <= TWELVE_HOURS) {
+                    // If it's less than 12 hours old, restore the value
+                    textarea.value = parsed.value;
+                } else {
+                    // Otherwise, ignore or remove the stale data
+                    console.log(`Data for ${textarea.id} is older than 12 hours; not restoring.`);
+                    // Optionally remove from Local Storage:
+                    // localStorage.removeItem(textarea.id);
+                }
+            } catch (e) {
+                console.warn(`Invalid JSON in localStorage for ${textarea.id}`, e);
+            }
         }
     });
 
     // Restore table cells from Local Storage
     document.querySelectorAll("td[contenteditable=true]").forEach((cell, index) => {
-        const localStorageCellText = localStorage.getItem(`cell-${index}`);
-        if (localStorageCellText !== null) {
-            cell.innerText = localStorageCellText;
+        const storedJson = localStorage.getItem(`cell-${index}`);
+        if (storedJson) {
+            try {
+                const parsed = JSON.parse(storedJson);
+                if (Date.now() - parsed.timestamp <= TWELVE_HOURS) {
+                    cell.innerText = parsed.value;
+                } else {
+                    console.log(`Data for cell-${index} is older than 12 hours; not restoring.`);
+                    // localStorage.removeItem(`cell-${index}`);
+                }
+            } catch (e) {
+                console.warn(`Invalid JSON in localStorage for cell-${index}`, e);
+            }
         }
     });
 
-    closeOverlay(); // Close overlay after restoring data
+    // Close the overlay as before
+    closeOverlay();
 }
 
 function restoreImage(containerId, imageName) {
@@ -420,7 +454,7 @@ function restoreImage(containerId, imageName) {
     <div class="overlay-content">
         <span class="close-btn" onclick="closeOverlay()">&times;</span>
         <h2>Restore Panel</h2>
-        <p>Click a button below to restore lost images or restore data.</p>
+        <p>Click a button below to place example images or restore data.</p>
         
         <button onclick="restoreImage('imageContainer1', 'gelmodel.jpg')">Gel Model</button>
         <button onclick="restoreImage('imageContainer2', 'gelresult.jpg')">Gel Result</button>
