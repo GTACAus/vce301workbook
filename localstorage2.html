@@ -374,61 +374,61 @@
         }
 
 
-        // ------------------------------------------------------------------------
-        // Restore from Local Storage
-        // ------------------------------------------------------------------------
-        function restoreLocalStorageData() {
-            // Restore text areas from Local Storage
-            document.querySelectorAll("textarea").forEach(textarea => {
-                const localStorageValue = localStorage.getItem(textarea.id);
-                if (localStorageValue !== null) {
-                    textarea.value = localStorageValue;
-                }
-            });
-
-            // Restore table cells from Local Storage
-            document.querySelectorAll("td[contenteditable=true]").forEach((cell, index) => {
-                const localStorageCellText = localStorage.getItem(`cell-${index}`);
-                if (localStorageCellText !== null) {
-                    cell.innerText = localStorageCellText;
-                }
-            });
-        }
         function showOverlay() {
-            document.getElementById("passwordOverlay").style.display = "flex";
+    document.getElementById("passwordOverlay").style.display = "flex";
+}
+
+function closeOverlay() {
+    document.getElementById("passwordOverlay").style.display = "none";
+}
+
+function restoreLocalStorageData() {
+    // Restore text areas from Local Storage
+    document.querySelectorAll("textarea").forEach(textarea => {
+        const localStorageValue = localStorage.getItem(textarea.id);
+        if (localStorageValue !== null) {
+            textarea.value = localStorageValue;
         }
+    });
 
-        function closeOverlay() {
-            document.getElementById("passwordOverlay").style.display = "none";
+    // Restore table cells from Local Storage
+    document.querySelectorAll("td[contenteditable=true]").forEach((cell, index) => {
+        const localStorageCellText = localStorage.getItem(`cell-${index}`);
+        if (localStorageCellText !== null) {
+            cell.innerText = localStorageCellText;
         }
+    });
 
-        function restoreLocalStorageData() {
-            // Restore text areas from Local Storage
-            document.querySelectorAll("textarea").forEach(textarea => {
-                const localStorageValue = localStorage.getItem(textarea.id);
-                if (localStorageValue !== null) {
-                    textarea.value = localStorageValue;
-                }
-            });
+    closeOverlay(); // Close overlay after restoring data
+}
 
-            // Restore table cells from Local Storage
-            document.querySelectorAll("td[contenteditable=true]").forEach((cell, index) => {
-                const localStorageCellText = localStorage.getItem(`cell-${index}`);
-                if (localStorageCellText !== null) {
-                    cell.innerText = localStorageCellText;
-                }
-            });
+function restoreImage(containerId, imageName) {
+    const container = document.getElementById(containerId);
+    if (container) {
+        const image = document.createElement("img");
+        image.src = imageName; // Uses relative path assuming images are in the same folder
+        image.style.maxWidth = "100%";
+        container.innerHTML = ""; // Clear existing content
+        container.appendChild(image);
+    }
+}
 
-            closeOverlay(); // Close overlay after restoring data
-        }
 
     </script>
 <!-- Overlay for Password-Protected Actions -->
 <div id="passwordOverlay" class="overlay">
     <div class="overlay-content">
         <span class="close-btn" onclick="closeOverlay()">&times;</span>
-        <h2>Restore Options</h2>
-        <p>Click the button below to restore data from local storage.</p>
+        <h2>Access Restricted</h2>
+        <p>Click a button below to restore lost images or restore data.</p>
+        
+        <button onclick="restoreImage('imageContainer1', 'gelmodel.jpg')">Gel Model</button>
+        <button onclick="restoreImage('imageContainer2', 'gelresult.jpg')">Gel Result</button>
+        <button onclick="restoreImage('imageContainer3', 'growthmodel.jpg')">Bacterial Growth Model</button>
+        <button onclick="restoreImage('imageContainer4', 'fluoro.jpg')">Fluorescent Bacteria</button>
+        <button onclick="restoreImage('imageContainer5', 'sample.jpg')">Sample Result</button>
+
+        <hr>
         <button onclick="restoreLocalStorageData()">Restore Data</button>
     </div>
 </div>
@@ -455,6 +455,7 @@
         text-align: center;
         box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
         width: 300px;
+        position: relative;
     }
 
     .close-btn {
@@ -466,6 +467,8 @@
     }
 
     .overlay button {
+        display: block;
+        width: 100%;
         background: #007BFF;
         color: white;
         padding: 10px;
@@ -474,7 +477,12 @@
         cursor: pointer;
         margin-top: 10px;
     }
+    
+    .overlay hr {
+        margin: 15px 0;
+    }
 </style>
+
 
 </body>
 </html>
