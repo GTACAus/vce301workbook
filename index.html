@@ -172,7 +172,7 @@
         <h4 style="color: #ff6d3a">
           Insert picture of your predicted eGel results.
         </h4>
-        
+
         <input
           type="file"
           accept="image/*"
@@ -335,7 +335,9 @@
           ></textarea>
 
           <h4>Modelling Activity: What is happening on each growth medium?</h4>
-          <h5 style="color: #ff6d3a">Insert an image of your completed modelling activity here</h5>
+          <h5 style="color: #ff6d3a">
+            Insert an image of your completed modelling activity here
+          </h5>
           <input
             type="file"
             accept="image/*"
@@ -363,7 +365,9 @@
           />
           <div id="imageContainer4" class="image-container"></div>
 
-          <h5 style="color: #ff6d3a">Insert an image of the sample answers to compare and discuss</h5>
+          <h5 style="color: #ff6d3a">
+            Insert an image of the sample answers to compare and discuss
+          </h5>
           <input
             type="file"
             accept="image/*"
@@ -434,11 +438,17 @@
         openDB().then((db) => {
           const transaction = db.transaction("images", "readwrite");
           const store = transaction.objectStore("images");
+
+          // Generate a unique key for each image
+          const uniqueId = containerId + "_" + Date.now();
+
           const imageEntry = {
-            id: containerId,
+            id: uniqueId, // Unique key
+            containerId: containerId,
             image: imageData,
             timestamp: Date.now(),
           };
+
           store.put(imageEntry);
         });
       }
@@ -453,9 +463,12 @@
           request.onsuccess = function () {
             const images = request.result;
             const currentTime = Date.now();
+
             images.forEach((imageEntry) => {
+              // Check if within expiry
               if (currentTime - imageEntry.timestamp <= IMAGE_EXPIRY) {
-                displayImage(imageEntry.image, imageEntry.id);
+                // Display each image in the correct container
+                displayImage(imageEntry.image, imageEntry.containerId);
               } else {
                 // Remove expired images
                 removeImageFromDB(imageEntry.id);
@@ -478,10 +491,14 @@
       function displayImage(imageData, containerId) {
         const container = document.getElementById(containerId);
         if (container) {
+          // Only clear if it is NOT container 3
+          if (containerId !== "imageContainer3") {
+            container.innerHTML = "";
+          }
+
           const image = document.createElement("img");
           image.src = imageData;
           image.style.maxWidth = "100%";
-          container.innerHTML = "";
           container.appendChild(image);
         }
       }
@@ -493,8 +510,8 @@
           const reader = new FileReader();
           reader.onload = function (e) {
             const imageData = e.target.result;
-            saveImageToDB(containerId, imageData); // Store image
-            displayImage(imageData, containerId); // Display image
+            saveImageToDB(containerId, imageData); // Save each image with a unique ID
+            displayImage(imageData, containerId); // Append the image in the UI
           };
           reader.readAsDataURL(file);
         }
@@ -739,7 +756,9 @@
         <button onclick="restoreImage('imageContainer5', 'sample.JPG')">
           Sample Result
         </button>
-        <button onclick="clearAllImages()">Clear All Images (DANGER-CANNOT UNDO)</button>
+        <button onclick="clearAllImages()">
+          Clear All Images (DANGER-CANNOT UNDO)
+        </button>
 
         <hr />
         <button onclick="restoreLocalStorageData()">Restore Data</button>
