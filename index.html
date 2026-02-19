@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>GTAC VCE301 Student Logbook</title>
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;700&amp;display=swap" rel="stylesheet">
 
     <style>
       body {
@@ -27,6 +28,7 @@
         color: white;
         border: none;
         border-radius: 5px;
+        font-family: inherit;
       }
       .container {
         max-width: 800px;
@@ -36,14 +38,35 @@
         margin-bottom: 50px;
       }
       .image-container {
-        max-width: 80%;
+        justify-content: center;
+        align-items: center;
+        max-width: 90%;
         height: auto;
         margin-top: 20px;
       }
       textarea {
+        font-family: inherit;
         width: 100%;
         height: 100px;
         margin-top: 20px;
+      }
+      .custom-upload-btn {
+        display: inline-block;
+        background: #007bff;
+        color: white;
+        padding: 10px 18px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-family: inherit;
+        font-size: 1em;
+        margin-bottom: 10px;
+        transition: background 0.2s;
+      }
+      .custom-upload-btn:hover {
+        background: #0056b3;
+      }
+      .custom-upload-btn input[type="file"] {
+        display: none;
       }
     </style>
   </head>
@@ -70,8 +93,15 @@
       <h2>Enter Your Names:</h2>
       <textarea id="experiment1" placeholder="Type your names here"></textarea>
 
+      <h3 style="text-align: left; margin-left: 10%;"> Session outline: </h3>
+      <p style="text-align: left; margin-left: 10%;"> 
+      Investigation 1: Plasmid Diagnostics <br>
+      Investigation 2: Bacterial transformation <br>
+      Investigation 3: Selecting transformed bacteria </p>
+
+
       <img
-        src="https://cdn.glitch.global/bedc10a6-54ca-4681-bce3-e9149cb53de3/recombinantplasmid?v=1738712387414"
+        src="BacterialTransformationProtocol.png"
         alt="Process of transforming bacteria with recombinant plasmid"
         style="width: 100%"
       />
@@ -83,7 +113,7 @@
           gel electrophoresis.
         </h3>
         <img
-          src="https://cdn.glitch.global/bedc10a6-54ca-4681-bce3-e9149cb53de3/orivsrecombinantplasmidmap?v=1738715311314"
+          src="ComparePlasmids.png"
           alt="Plasmid map comparison"
           style="width: 100%"
         />
@@ -162,7 +192,7 @@
               <td contenteditable="true"></td>
             </tr>
           </table>
-          <p>
+          <p style="font-style: italic;">
             Ignore fragments if they are less than 30 bp – they cannot be
             detected experimentally
           </p>
@@ -173,11 +203,14 @@
           Insert picture of your predicted eGel results.
         </h4>
 
-        <input
-          type="file"
-          accept="image/*"
-          onchange="addUploadedImage(event, 'imageContainer1')"
-        />
+        <label class="custom-upload-btn">
+          Choose File
+          <input
+            type="file"
+            accept="image/*"
+            onchange="addUploadedImage(event, 'imageContainer1')"
+          />
+        </label>
         <div id="imageContainer1" class="image-container"></div>
         <h3 style="color: #ff6d3a">
           Summarise what is occurring during Gel Electrophoresis
@@ -190,17 +223,20 @@
 
       <h2>Results: Gel Electrophoresis</h2>
       <img
-        src="https://cdn.glitch.global/fcc4e6ca-0f57-4233-b69a-10230c4b69f6/eGelloadedlanes?v=1738890443008"
+        src="RestrictionDigestTable.png"
         alt="Egel Lanes"
         style="width: 80%"
       />
 
       <h4 style="color: #ff6d3a">Insert picture of the eGel results</h4>
-      <input
-        type="file"
-        accept="image/*"
-        onchange="addUploadedImage(event, 'imageContainer2')"
-      />
+      <label class="custom-upload-btn">
+        Upload a photo of your gel electrophoresis results here
+        <input
+          type="file"
+          accept="image/*"
+          onchange="addUploadedImage(event, 'imageContainer2')"
+        />
+      </label>
 
       <div id="imageContainer2" class="image-container"></div>
       <h2>Analysis: DNA Gel Electrophoresis results</h2>
@@ -233,11 +269,11 @@
         </style>
         <div class="image-container">
           <img
-            src="https://cdn.glitch.global/bedc10a6-54ca-4681-bce3-e9149cb53de3/Investigation2?v=1738727664648"
+            src="AimBacterialTransformation.png"
             alt="Example Image"
           />
           <img
-            src="https://cdn.glitch.global/fcc4e6ca-0f57-4233-b69a-10230c4b69f6/investigation2protocol?v=1738817484920"
+            src="BacterialTransformationProtocol.png"
             alt="Transformation Protocol"
           />
         </div>
@@ -246,13 +282,13 @@
         <h3 style="color: #ff6d3a">Step 1: Making bacteria competent</h3>
 
         <img
-          src="https://cdn.glitch.global/bedc10a6-54ca-4681-bce3-e9149cb53de3/competentbacteria?v=1738724782056"
+          src="CaClcompetent.png"
           alt="Using CaCl2 to make bacteria competent"
           style="width: 100%"
         />
 
         <img
-          src="https://cdn.glitch.global/bedc10a6-54ca-4681-bce3-e9149cb53de3/Cacl2%20conc%20graph.png?v=1738719272040"
+          src="CaClGraph.png"
           alt="CaCl2 graph"
           style="width: 100%"
         />
@@ -267,7 +303,7 @@
 
         <h3 style="color: #ff6d3a">Step 2: Heat Shock</h3>
         <img
-          src="https://cdn.glitch.global/bedc10a6-54ca-4681-bce3-e9149cb53de3/heatshock.png?v=1738726774760"
+          src="HeatShock.png"
           alt="Heat Shock"
           style="width: 100%"
         />
@@ -280,7 +316,7 @@
           id="experiment6"
           placeholder="Type your selected conditions for heat shock here"
         ></textarea>
-        <div><h5>What is the purpose of heat shock?</h5></div>
+        <h4 style="text-align: left;">What is the purpose of heat shock?</h4>
         <textarea
           id="experiment7"
           placeholder="Type the purpose of heat shock here"
@@ -291,7 +327,7 @@
           protocol.
         </h4>
         <img
-          src="https://cdn.glitch.global/fcc4e6ca-0f57-4233-b69a-10230c4b69f6/recoverytime?v=1738795693224"
+          src="RecoveryGraph.png"
           alt="Recovery Time graph"
           style="width: 100%"
         />
@@ -307,7 +343,7 @@
             for use in insulin production.
           </h3>
           <img
-            src="https://cdn.glitch.global/fcc4e6ca-0f57-4233-b69a-10230c4b69f6/Investigation3Aim?v=1738817153606"
+            src="AimFluro.png"
             alt="Investigation3Aim"
             style="width: 100%"
           />
@@ -336,13 +372,16 @@
 
           <h4>Modelling Activity: What is happening on each growth medium?</h4>
           <h5 style="color: #ff6d3a">
-            Insert an image of your completed modelling activity here
+            Complete the model using coloured beads to represent the growth on different media (LB, LB/Amp, LB/Amp/ara). 
           </h5>
-          <input
-            type="file"
-            accept="image/*"
-            onchange="addUploadedImage(event, 'imageContainer3')"
-          />
+          <label class="custom-upload-btn">
+            Insert an image of your completed modelling activity here
+            <input
+              type="file"
+              accept="image/*"
+              onchange="addUploadedImage(event, 'imageContainer3')"
+            />
+          </label>
           <div id="imageContainer3" class="image-container"></div>
           <h5>
             Using the model, summarise the purpose of the ingredients added to
@@ -355,44 +394,57 @@
 
           <h4>Results: Fluorescence microscopy</h4>
           <h5 style="color: #ff6d3a">
-            Insert an image of your bacteria viewed through the Fluorescent
-            microscope (EVOS)
+            Go to the EVOS microscope and capture an image of your bacteria under the fluorescent microscope. 
           </h5>
-          <input
-            type="file"
-            accept="image/*"
-            onchange="addUploadedImage(event, 'imageContainer4')"
-          />
-          <div id="imageContainer4" class="image-container"></div>
+<div style="margin: 24px 0;">
+  <table style="border-collapse: separate; border-spacing: 0; width: 100%; max-width: 100%; box-shadow: none; table-layout: fixed;">
+    <tr>
+  <td style="width:50%; text-align: center; font-weight: bold; background: #f8f8f8; padding: 10px 0; border-right: 2px solid #ccc;">1: +pREC E. coli  on LB/Amp media</td>
+  <td style="width:50%; text-align: center; font-weight: bold; background: #f8f8f8; padding: 10px 0;">2: +pREC E. coli on LB/Amp/Ara media</td>
+    </tr>
+    <tr>
+  <td style="width:50%; text-align: center; border-right: 2px solid #ccc; padding: 18px 0;">
+        <label class="custom-upload-btn">
+          Upload image
+          <input type="file" accept="image/*" onchange="addUploadedImage(event, 'controlSlideImg')" style="display:none;" />
+        </label>
+        <div id="imageContainer4" class="image-container"></div>
+      </td>
+  <td style="width:50%; text-align: center; padding: 18px 0;">
+        <label class="custom-upload-btn">
+          Upload image
+          <input type="file" accept="image/*" onchange="addUploadedImage(event, 'experimentSlideImg')" style="display:none;" />
+        </label>
+        <div id="imageContainer5" class="image-container"></div>
+      </td>
+    </tr>
+  </table>
+</div>
 
-          <h5 style="color: #ff6d3a">
-            Insert an image of the sample answers to compare and discuss
-          </h5>
-          <input
-            type="file"
-            accept="image/*"
-            onchange="addUploadedImage(event, 'imageContainer5')"
-          />
-          <div id="imageContainer5" class="image-container"></div>
 
           <h3>Discussion:</h3>
           <h5>Consider the following questions:</h5>
           <p style="text-align: left">
             1. What is the purpose of transforming bacteria?
             <br />
+<textarea
+            id="experiment12"
+            placeholder="Type your response here"
+          ></textarea>
+
             2. What are some possible explanations for differences between the
             results you might see back at school? <br />
             i.e. Limitations and errors?
           </p>
 
           <textarea
-            id="experiment12"
+            id="experiment13"
             placeholder="Type your response here"
           ></textarea>
 
           <h3>Conclusion (back at school):</h3>
           <textarea
-            id="experiment13"
+            id="experiment14"
             placeholder="Write your conclusions here"
           ></textarea>
         </div>
