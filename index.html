@@ -572,22 +572,18 @@
         }
       }
 
-      // Restore Images on Page Load
-      document.addEventListener("DOMContentLoaded", function () {
-        restoreImagesFromDB();
-      });
-
-      // ------------------------------------------------------------------------
       // Print Page as PDF
-      // ------------------------------------------------------------------------
       function printPageAsPDF() {
         window.print();
       }
 
       // ------------------------------------------------------------------------
-      // Save and Restore (Session and Local Storage)
+      // Restore Images, Text, and Cells on Page Load
       // ------------------------------------------------------------------------
       document.addEventListener("DOMContentLoaded", function () {
+        // Restore Images from IndexedDB on page load
+        restoreImagesFromDB();
+
         // Restore text areas from Session Storage on page load
         document.querySelectorAll("textarea").forEach((textarea) => {
           const savedText = sessionStorage.getItem(textarea.id);
