@@ -148,63 +148,13 @@
 
         <body>
           <h2>Results: Modelling Double digest on plasmids</h2>
-          <table>
-            <tr>
-              <th></th>
-              <th colspan="2">Original Plasmid (4641 bp)</th>
-              <th colspan="2">Recombinant Plasmid (5428 bp)</th>
-            </tr>
-            <tr>
-              <td>Enzyme pair used for digest:</td>
-              <td>Number of fragments</td>
-              <td>Sizes of fragments (bp)</td>
-              <td>Number of fragments</td>
-              <td>Sizes of fragments (bp)</td>
-            </tr>
-            <tr>
-              <td>
-                EcoRV
-                <div>NheI</div>
-              </td>
-              <td contenteditable="true"></td>
-              <td contenteditable="true"></td>
-              <td contenteditable="true"></td>
-              <td contenteditable="true"></td>
-            </tr>
-            <tr>
-              <td>
-                EcoRV
-                <div>XhoI</div>
-              </td>
-              <td contenteditable="true"></td>
-              <td contenteditable="true"></td>
-              <td contenteditable="true"></td>
-              <td contenteditable="true"></td>
-            </tr>
-            <tr>
-              <td>
-                NheI
-                <div>SmaI</div>
-              </td>
-              <td contenteditable="true"></td>
-              <td contenteditable="true"></td>
-              <td contenteditable="true"></td>
-              <td contenteditable="true"></td>
-            </tr>
-          </table>
-          <p style="font-style: italic;">
-            Ignore fragments if they are less than 30 bp – they cannot be
-            detected experimentally
-          </p>
-        </body>
-
-        <h2>Modelling: Gel Electrophoresis</h2>
-        <h4 style="color: #ff6d3a">
-          Insert picture of your predicted eGel results.
+          
+       <h4 style="color: #ff6d3a">
+       Take a photo of your completed table for the double digest activity.
         </h4>
 
         <label class="custom-upload-btn">
-          Choose File
+      Insert photo of your completed table here.
           <input
             type="file"
             accept="image/*"
@@ -212,6 +162,23 @@
           />
         </label>
         <div id="imageContainer1" class="image-container"></div>
+
+        </body>
+
+        <h2>Modelling: Gel Electrophoresis</h2>
+        <h4 style="color: #ff6d3a">
+          Take a picture of your predicted eGel results.
+        </h4>
+
+        <label class="custom-upload-btn">
+          Insert photo of your eGel model here
+          <input
+            type="file"
+            accept="image/*"
+            onchange="addUploadedImage(event, 'imageContainer2')"
+          />
+        </label>
+        <div id="imageContainer2" class="image-container"></div>
         <h3 style="color: #ff6d3a">
           Summarise what is occurring during Gel Electrophoresis
         </h3>
@@ -234,11 +201,11 @@
         <input
           type="file"
           accept="image/*"
-          onchange="addUploadedImage(event, 'imageContainer2')"
+          onchange="addUploadedImage(event, 'imageContainer3')"
         />
       </label>
 
-      <div id="imageContainer2" class="image-container"></div>
+      <div id="imageContainer3" class="image-container"></div>
       <h2>Analysis: DNA Gel Electrophoresis results</h2>
       <h4>
         Identify the tube that contains the recombinant plasmids (Tube 1 or Tube
@@ -378,10 +345,10 @@
             <input
               type="file"
               accept="image/*"
-              onchange="addUploadedImage(event, 'imageContainer3')"
+              onchange="addUploadedImage(event, 'imageContainer4')"
             />
           </label>
-          <div id="imageContainer3" class="image-container"></div>
+          <div id="imageContainer4" class="image-container"></div>
           <h5>
             Using the model, summarise the purpose of the ingredients added to
             the growth media (LB/Ampicillin/Arabinose)
@@ -405,22 +372,22 @@
   <td style="width:50%; text-align: center; border-right: 2px solid #ccc; padding: 18px 0;">
         <label class="custom-upload-btn">
           Upload image
-          <input type="file" accept="image/*" onchange="addUploadedImage(event, 'imageContainer4')" />
+          <input type="file" accept="image/*" onchange="addUploadedImage(event, 'imageContainer5')" />
         </label>
-        <div id="imageContainer4" class="image-container" style="display: flex; justify-content: center; align-items: center; max-height: 400px;"></div>
+        <div id="imageContainer5" class="image-container" style="display: flex; justify-content: center; align-items: center; max-height: 400px;"></div>
       </td>
   <td style="width:50%; text-align: center; padding: 18px 0;">
         <label class="custom-upload-btn">
           Upload image
-          <input type="file" accept="image/*" onchange="addUploadedImage(event, 'imageContainer5')" />
+          <input type="file" accept="image/*" onchange="addUploadedImage(event, 'imageContainer6')" />
         </label>
-        <div id="imageContainer5" class="image-container" style="display: flex; justify-content: center; align-items: center; max-height: 400px;"></div>
+        <div id="imageContainer6" class="image-container" style="display: flex; justify-content: center; align-items: center; max-height: 400px;"></div>
       </td>
     </tr>
   </table>
 </div>
 <style>
-  #imageContainer4 img, #imageContainer5 img {
+  #imageContainer7 img, #imageContainer8 img {
     max-width: 100%;
     max-height: 400px;
     object-fit: contain;
@@ -546,8 +513,8 @@
       function displayImage(imageData, containerId) {
         const container = document.getElementById(containerId);
         if (container) {
-          // Only clear if it is NOT container 3
-          if (containerId !== "imageContainer3") {
+          // Only clear if it is NOT container 4
+          if (containerId !== "imageContainer4") {
             container.innerHTML = "";
           }
 
@@ -772,7 +739,10 @@
             "imageContainer3",
             "imageContainer4",
             "imageContainer5",
-          ];
+            "imageContainer6",
+            "imageContainer7",
+            "imageContainer8",
+             ];
 
           imageContainers.forEach((containerId) => {
             const container = document.getElementById(containerId);
@@ -791,20 +761,22 @@
         <span class="close-btn" onclick="closeOverlay()">&times;</span>
         <h2>Restore Panel</h2>
         <p>Click a button below to place example images or restore data.</p>
-
-        <button onclick="restoreImage('imageContainer1', 'gelmodel.JPG')">
+        <button onclick="restoreImage('imageContainer1', 'DoubleDigestTableAnswers.png')">
+          Double Digest Table Answers
+        </button>
+        <button onclick="restoreImage('imageContainer2', 'gelmodel.JPG')">
           Gel Model
         </button>
-        <button onclick="restoreImage('imageContainer2', 'gelresult.JPG')">
+        <button onclick="restoreImage('imageContainer3', 'gelresult.JPG')">
           Gel Result
         </button>
-        <button onclick="restoreImage('imageContainer3', 'growthmodel.JPG')">
+        <button onclick="restoreImage('imageContainer4', 'growthmodel.JPG')">
           Bacterial Growth Model
         </button>
-        <button onclick="restoreImage('imageContainer4', 'fluoro.JPG')">
+        <button onclick="restoreImage('imageContainer5', 'fluoro.JPG')">
           Fluorescent Bacteria
         </button>
-        <button onclick="restoreImage('imageContainer5', 'sample.JPG')">
+        <button onclick="restoreImage('imageContainer6', 'sample.JPG')">
           Sample Result
         </button>
         <button onclick="clearAllImages()">
